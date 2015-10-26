@@ -1,0 +1,23 @@
+{
+  "name" : "Cancer_Network",
+  "version" : "0.0.1",
+  "description" : "A Social Network for connecting families looking for support in the fight against Cancer",
+  "dependencies" : {
+    "express" : "latest",
+    "cassandra-driver" : "latest",
+    "express-cassandra" : "latest",
+    "morgan" : "latest",
+    "compression" : "latest",
+    "body-parser" : "latest",
+    "method-override" : "latest",
+    "ejs" : "latest",
+    "express-session" : "latest",
+    "passport" : "latest",
+    "passport-local" : "latest",
+    "connect-flash" : "latest",
+    "passport-facebook" : "latest",
+    "passport-google-oauth" : "latest",
+    "cassandra-store": "latest",
+    "bcrypt": "latest"
+  }
+}
