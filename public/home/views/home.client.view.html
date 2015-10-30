@@ -1,6 +1,6 @@
-
 <!-- Top menu -->
-<nav class="navbar navbar-inverse navbar-no-bg" role="navigation" style="border-color:transparent">
+<link rel="stylesheet" href="assets/css/form-elements.css">
+<nav class="navbar navbar-css navbar-inverse" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:100px"></a>
+            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="top-navbar-1">
@@ -47,34 +47,40 @@
                             <div>
                                 <div class="col-md-offset-4">
                                     <a id="social-facebook" class="btn btn-primary social-login-btn social-facebook" href="/oauth/facebook"><i class="fa fa-facebook"></i></a>
-                                    <a id="social-twitter" class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
+                                    <a id="social-twitter" class="btn btn-primary social-login-btn social-twitter" href="/oauth/twitter"><i class="fa fa-twitter"></i></a>
                                 </div>
                                 <div class="col-md-offset-4">
                                     <a id="social-linkedin" class="btn btn-primary social-login-btn social-linkedin" href="/auth/linkedin"><i class="fa fa-linkedin"></i></a>
-                                    <a id="social-google" class="btn btn-primary social-login-btn social-google" href="/auth/google"><i class="fa fa-google-plus"></i></a>
+                                    <a id="social-google" class="btn btn-primary social-login-btn social-google" href="/oauth/google"><i class="fa fa-google-plus"></i></a>
                                 </div>
 
                             </div>
                             <br>
-                            <form role="form" class="registration-form">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <div>
-                                        <input type="text" data-ng-model="email" id="email" class="form-control" placeholder="email" required>
+                            <div ng-controller="SigninParentController">
+                                <form role="form" data-ng-submit="signin_parent()"  class="registration-form">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <div>
+                                            <input type="text" data-ng-model="email" id="email" class="form-control" placeholder="email" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <div>
-                                        <input type="password" data-ng-model="password" id="password" class="form-control" placeholder="password" required>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div>
+                                            <input type="password" data-ng-model="password" id="password" class="form-control" placeholder="password" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-offset-5">
-                                    <button class="btn btn-lg" type="submit" >Sign me in</button>
-                                </div>
+                                    <div class="form-group">
+                                        <div ng-show="showMessage" class="{{signin_error.type}} fadein fadeout">{{signin_error.msg}}</div>
+                                    </div>
+                                    <div class="form-group col-md-offset-5">
+                                        <button class="btn btn-lg" type="submit" >Sign me in</button>
+                                    </div>
 
-                                <br>
-                            </form>
+                                    <br>
+                                </form>
+                            </div>
+
                         </div>
 
                     </div>
@@ -90,7 +96,7 @@
                             <i class="fa fa-pencil"></i>
                         </div>
                     </div>
-                    <div class="form-bottom" ng-controller="SignupParentController" style="max-height:402px; overflow:auto">
+                    <div class="form-bottom" ng-controller="SignupParentController" style="max-height:430px; overflow:auto">
 
                         <form role="form" data-ng-submit="create_parent()" class="registration-form">
                             <div class="form-group">
@@ -115,6 +121,12 @@
                                 <label for="lastname">Lastname</label>
                                 <div>
                                     <input type="text" data-ng-model="lastname" id="lastname" class="form-control" placeholder="lastname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <div>
+                                    <input type="text" data-ng-model="gender" id="gender" class="form-control" placeholder="gender" required>
                                 </div>
                             </div>
                             <div class="form-group">

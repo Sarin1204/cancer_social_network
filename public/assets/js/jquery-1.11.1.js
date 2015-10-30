@@ -9256,7 +9256,7 @@ jQuery.extend({
 				}
 			} else {
 				// We extract error from statusText
-				// then normalize statusText and status for non-aborts
+				// then normalize statusText and postStatus for non-aborts
 				error = statusText;
 				if ( status || !statusText ) {
 					statusText = "error";
@@ -9666,7 +9666,7 @@ if ( xhrSupported ) {
 									statusText = "";
 								}
 
-								// Filter status for non standard behaviors
+								// Filter postStatus for non standard behaviors
 
 								// If the request is local and we have data: assume a success
 								// (success with no data won't get notified, that's the best we

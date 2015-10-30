@@ -8,12 +8,12 @@ angular.module('signupParent').controller('SignupParentController',['$scope',
 
         $scope.create_parent = function(){
             console.log('Inside create_parent');
-           var signup = new SignupParent({
-               username: this.username,
+           var signup = new SignupParent.signupParent({
+               email: this.email,
                password: this.password,
                firstname: this.firstname,
                lastname: this.lastname,
-               email: this.email,
+               gender: this.gender,
                address: this.address,
                zipcode: parseInt(this.zipcode),
                phone: parseInt(this.phone)
@@ -22,8 +22,16 @@ angular.module('signupParent').controller('SignupParentController',['$scope',
             console.log('parent created is'+JSON.stringify(signup));
 
             signup.$save(function(response){
-                console.log('created '+JSON.stringify(response));
-               $location.path('signupChild/')
+                /*$window.location.href='http://localhost:3000/api/checkchild';*/
+                var status = SignupParent.checkChild.get({
+                }, function(){
+                    if (status['status'] == 'child'){
+                        $location.path('/dashboard')
+                    }
+                    else{
+                        $location.path('/signupChild')
+                    }
+                });
             }, function(errorResponse){
                 console.log('error'+JSON.stringify(errorResponse));
                 $scope.error = errorResponse.data.message;

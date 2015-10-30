@@ -9,10 +9,12 @@ var passport = require('passport'),
     bcrypt = require('bcrypt');
 
 module.exports = function() {
-    passport.use(new LocalStrategy(function(email, password, done){
-        console.log("local js email == "+email+" password == "+password);
+    passport.use(new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password'
+    },function(email, password, done){
         models.instance.parents.findOne({email : email}, function(err, parent){
-            console.log("local js person found is "+JSON.stringify(parent));
+            /*console.log("local js person found is "+JSON.stringify(parent));*/
             if (err) {
                 return done(err);
             }
@@ -30,15 +32,12 @@ module.exports = function() {
                         message: 'Invalid Password'
                     });
                 }
+                else{
+                   /* console.log('Found in local js'+parent);*/
+                    return done(null, parent);
+                }
             });
 
-            /*if (person.password !== password){
-             console.log('invalid password')
-             return done(null, false, {
-             message: 'Invalid Password'
-             });
-             }*/
-            return done(null, parent);
         });
     }));
 };

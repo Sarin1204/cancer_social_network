@@ -3,7 +3,10 @@
  */
 
 angular.module('signupParent').factory('SignupParent',['$resource',
-    function($resource){
-        return $resource('api/signupParent');
-    }
+    function($resource) {
+        return {
+            signupParent:  $resource('api/signupParent'),
+            checkChild: $resource('api/angular/checkChild')
+    };
+}
 ]);

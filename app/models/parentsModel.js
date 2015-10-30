@@ -14,7 +14,15 @@ module.exports = {
         "phone" : {"type": "varint"},
         "facebook_id": {"type": "text"},
         "google_id": {"type": "text"},
-        "profile_photo": {"type": "text"},
+        "twitter_id": {"type": "text"},
+        "profile_photo": {"type": "text", "default": function(){
+            if (this.gender == 'female'){
+                    return  "/img/empty_dp_female.png"
+                }
+            else
+                    return "/img/empty_dp_male.jpg"
+            }
+        },
         "gender": {"type": "text"}
     },
     "key" : [["email"]]

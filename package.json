@@ -17,7 +17,9 @@
     "connect-flash" : "latest",
     "passport-facebook" : "latest",
     "passport-google-oauth" : "latest",
+    "passport-twitter" : "latest",
     "cassandra-store": "latest",
-    "bcrypt": "latest"
+    "bcrypt": "latest",
+    "node-uuid": "latest"
   }
 }

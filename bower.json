@@ -6,6 +6,7 @@
     "angular-route" : "latest",
     "angular-resource" : "latest",
     "angular-bootstrap" : "latest",
-    "ng-tags-input" : "latest"
+    "ng-tags-input" : "latest",
+    "angular-animate" : "latest"
   }
 }

@@ -37,7 +37,7 @@ module.exports = function () {
         saveUninitialized: true,
         resave: true,
         secret: config.sessionSecret,
-        cookie: {maxAge: 3600000},
+        cookie: {maxAge: 360000},
         store: cassandrastore
     }));
 
@@ -52,6 +52,9 @@ module.exports = function () {
     require('../app/routes/index.server.route.js').home(app);
     require('../app/routes/signupParent.server.route.js')(app);
     require('../app/routes/signupChild.server.route.js')(app);
+    require('../app/routes/signinParent.server.route.js')(app);
+    require('../app/routes/postStatus.server.route.js')(app);
+    require('../app/routes/dashboard.server.route.js')(app);
 
     app.use(express.static('./public'));
 

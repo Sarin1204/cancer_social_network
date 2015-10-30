@@ -2875,7 +2875,7 @@ angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.position'])
     return scope.isOpen = arguments.length ? !!open : !scope.isOpen;
   };
 
-  // Allow other directives to watch status
+  // Allow other directives to watch postStatus
   this.isOpen = function() {
     return scope.isOpen;
   };
@@ -3172,7 +3172,7 @@ angular.module('ui.bootstrap.dropdown')
     return scope.isOpen = arguments.length ? !!open : !scope.isOpen;
   };
 
-  // Allow other directives to watch status
+  // Allow other directives to watch postStatus
   this.isOpen = function() {
     return scope.isOpen;
   };

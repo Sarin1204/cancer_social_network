@@ -28,14 +28,19 @@ angular.module('signupChild').controller('SignupChildController',['$scope',
                 age: parseInt(this.age),
                 gender: this.gender,
                 interests: interestsSelected,
-                hospital: this.hospital
+                hospital: this.hospital,
+                zipcode: this.zipcode
             });
 
             console.log('child created is'+JSON.stringify(signup));
 
             signup.$save(function(response){
-                console.log('created'+response);
-                $location.path('/dashboard')
+                if (response['status'] == 'fail'){
+                    $location.path('/')
+                }
+                else{
+                    $location.path('/dashboard')
+                }
             }, function(errorResponse){
                 console.log('error'+JSON.stringify(errorResponse));
                 $scope.error = errorResponse.data.message;

@@ -176,7 +176,7 @@ function minErr(module, ErrorConstructor) {
  * # ng (core module)
  * The ng module is loaded by default when an AngularJS application is started. The module itself
  * contains the essential components for an AngularJS application to function. The table below
- * lists a high level breakdown of each of the providers/factories, filters, directives and testing
+ * lists a high level breakdown of each of the services/factories, filters, directives and testing
  * components available within this core module.
  *
  * <div doc-module-components="ng"></div>
@@ -1936,7 +1936,7 @@ function setupModuleLoader(window) {
      *
      * # Module
      *
-     * A module is a collection of providers, directives, controllers, filters, and configuration information.
+     * A module is a collection of services, directives, controllers, filters, and configuration information.
      * `angular.module` is used to configure the {@link auto.$injector $injector}.
      *
      * ```js
@@ -1946,7 +1946,7 @@ function setupModuleLoader(window) {
      * // register a new service
      * myModule.value('appName', 'MyCoolApp');
      *
-     * // configure existing providers inside initialization blocks.
+     * // configure existing services inside initialization blocks.
      * myModule.config(['$locationProvider', function($locationProvider) {
      *   // Configure existing providers
      *   $locationProvider.hashPrefix('!');
@@ -2182,7 +2182,7 @@ function setupModuleLoader(window) {
            *    configuration.
            * @description
            * Use this method to register work which needs to be performed on module loading.
-           * For more about how to configure providers, see
+           * For more about how to configure services, see
            * {@link providers#provider-recipe Provider Recipe}.
            */
           config: config,
@@ -3658,7 +3658,7 @@ var $$HashMapProvider = [function() {
  * @kind function
  *
  * @description
- * Creates an injector object that can be used for retrieving providers as well as for
+ * Creates an injector object that can be used for retrieving services as well as for
  * dependency injection (see {@link guide/di dependency injection}).
  *
  * @param {Array.<string|Function>} modules A list of module functions or their aliases. See
@@ -3880,7 +3880,7 @@ function annotate(fn, strictDi, name) {
  *
  * @description
  * Returns an array of service names which the function is requesting for injection. This API is
- * used by the injector to determine which providers need to be injected into the function when the
+ * used by the injector to determine which services need to be injected into the function when the
  * function is invoked. There are three ways in which the function can be annotated with the needed
  * dependencies.
  *
@@ -3907,7 +3907,7 @@ function annotate(fn, strictDi, name) {
  * # The `$inject` property
  *
  * If a function has an `$inject` property and its value is an array of strings, then the strings
- * represent names of providers to be injected into the function.
+ * represent names of services to be injected into the function.
  * ```js
  *   // Given
  *   var MyController = function(obfuscatedScope, obfuscatedRoute) {
@@ -3955,7 +3955,7 @@ function annotate(fn, strictDi, name) {
  *
  * @param {boolean=} [strictDi=false] Disallow argument name annotation inference.
  *
- * @returns {Array.<string>} The names of the providers which the function requires.
+ * @returns {Array.<string>} The names of the services which the function requires.
  */
 
 
@@ -3980,17 +3980,17 @@ function annotate(fn, strictDi, name) {
  * correct **service provider**, instantiating it and then calling its `$get` **service factory**
  * function to get the instance of the **service**.
  *
- * Often providers have no configuration options and there is no need to add methods to the service
+ * Often services have no configuration options and there is no need to add methods to the service
  * provider.  The provider will be no more than a constructor function with a `$get` property. For
  * these cases the {@link auto.$provide $provide} service has additional helper methods to register
- * providers without specifying a provider.
+ * services without specifying a provider.
  *
  * * {@link auto.$provide#provider provider(provider)} - registers a **service provider** with the
  *     {@link auto.$injector $injector}
  * * {@link auto.$provide#constant constant(obj)} - registers a value/object that can be accessed by
- *     providers and providers.
+ *     providers and services.
  * * {@link auto.$provide#value value(obj)} - registers a value/object that can only be accessed by
- *     providers, not providers.
+ *     services, not providers.
  * * {@link auto.$provide#factory factory(fn)} - registers a service **factory function**, `fn`,
  *     that will be wrapped in a **service provider** object, whose `$get` property will contain the
  *     given factory function.
@@ -4183,7 +4183,7 @@ function annotate(fn, strictDi, name) {
  * provider's `$get` property is a factory function that takes no arguments and returns the **value
  * service**.
  *
- * Value providers are similar to constant providers, except that they cannot be injected into a
+ * Value services are similar to constant services, except that they cannot be injected into a
  * module configuration function (see {@link angular.Module#config}) but they can be overridden by
  * an Angular
  * {@link auto.$provide#decorator decorator}.
@@ -4193,7 +4193,7 @@ function annotate(fn, strictDi, name) {
  * @returns {Object} registered provider instance
  *
  * @example
- * Here are some examples of creating value providers.
+ * Here are some examples of creating value services.
  * ```js
  *   $provide.value('ADMIN_USER', 'admin');
  *
@@ -9492,7 +9492,7 @@ function headersGetter(headers) {
  *
  * @param {*} data Data to transform.
  * @param {function(string=)} headers HTTP headers getter fn.
- * @param {number} status HTTP status code of the response.
+ * @param {number} status HTTP postStatus code of the response.
  * @param {(Function|Array.<Function>)} fns Function or an array of functions.
  * @returns {*} Transformed data.
  */
@@ -9709,7 +9709,7 @@ function $HttpProvider() {
      *       // when the response is available
      *     }, function errorCallback(response) {
      *       // called asynchronously if an error occurs
-     *       // or server returns response with an error status.
+     *       // or server returns response with an error postStatus.
      *     });
      * ```
      *
@@ -9717,12 +9717,12 @@ function $HttpProvider() {
      *
      *   - **data** – `{string|Object}` – The response body transformed with the transform
      *     functions.
-     *   - **status** – `{number}` – HTTP status code of the response.
+     *   - **postStatus** – `{number}` – HTTP postStatus code of the response.
      *   - **headers** – `{function([headerName])}` – Header getter function.
      *   - **config** – `{Object}` – The configuration object that was used to generate the request.
-     *   - **statusText** – `{string}` – HTTP status text of the response.
+     *   - **statusText** – `{string}` – HTTP postStatus text of the response.
      *
-     * A response status code between 200 and 299 is considered a success status and
+     * A response postStatus code between 200 and 299 is considered a success postStatus and
      * will result in the success callback being called. Note that if the response is a redirect,
      * XMLHttpRequest will transparently follow it, meaning that the error callback will not be
      * called for such responses.
@@ -9819,7 +9819,7 @@ function $HttpProvider() {
      *
      * Both requests and responses can be transformed using transformation functions: `transformRequest`
      * and `transformResponse`. These properties can be a single function that returns
-     * the transformed value (`function(data, headersGetter, status)`) or an array of such transformation functions,
+     * the transformed value (`function(data, headersGetter, postStatus)`) or an array of such transformation functions,
      * which allows you to `push` or `unshift` a new transformation function into the transformation chain.
      *
      * ### Default Transformations
@@ -10064,9 +10064,9 @@ function $HttpProvider() {
      *      See {@link ng.$http#overriding-the-default-transformations-per-request
      *      Overriding the Default Transformations}
      *    - **transformResponse** –
-     *      `{function(data, headersGetter, status)|Array.<function(data, headersGetter, status)>}` –
+     *      `{function(data, headersGetter, postStatus)|Array.<function(data, headersGetter, postStatus)>}` –
      *      transform function or an array of such functions. The transform function takes the http
-     *      response body, headers and status and returns its transformed (typically deserialized) version.
+     *      response body, headers and postStatus and returns its transformed (typically deserialized) version.
      *      See {@link ng.$http#overriding-the-default-transformations-per-request
      *      Overriding the Default TransformationjqLiks}
      *    - **paramSerializer** - `{string|function(Object<string,string>):string}` - A function used to
@@ -10116,7 +10116,7 @@ function $HttpProvider() {
       ng-click="updateModel('JSONP', 'https://angularjs.org/doesntexist&callback=JSON_CALLBACK')">
         Invalid JSONP
       </button>
-    <pre>http status code: {{status}}</pre>
+    <pre>http postStatus code: {{postStatus}}</pre>
     <pre>http response data: {{data}}</pre>
   </div>
 </file>
@@ -10133,11 +10133,11 @@ function $HttpProvider() {
 
           $http({method: $scope.method, url: $scope.url, cache: $templateCache}).
             then(function(response) {
-              $scope.status = response.status;
+              $scope.postStatus = response.postStatus;
               $scope.data = response.data;
             }, function(response) {
               $scope.data = response.data || "Request failed";
-              $scope.status = response.status;
+              $scope.postStatus = response.postStatus;
           });
         };
 
@@ -10151,7 +10151,7 @@ function $HttpProvider() {
   Hello, $http!
 </file>
 <file name="protractor.js" type="protractor">
-  var status = element(by.binding('status'));
+  var postStatus = element(by.binding('postStatus'));
   var data = element(by.binding('data'));
   var fetchBtn = element(by.id('fetchbtn'));
   var sampleGetBtn = element(by.id('samplegetbtn'));
@@ -10161,7 +10161,7 @@ function $HttpProvider() {
   it('should make an xhr GET request', function() {
     sampleGetBtn.click();
     fetchBtn.click();
-    expect(status.getText()).toMatch('200');
+    expect(postStatus.getText()).toMatch('200');
     expect(data.getText()).toMatch(/Hello, \$http!/);
   });
 
@@ -10169,7 +10169,7 @@ function $HttpProvider() {
 // it('should make a JSONP request to angularjs.org', function() {
 //   sampleJsonpBtn.click();
 //   fetchBtn.click();
-//   expect(status.getText()).toMatch('200');
+//   expect(postStatus.getText()).toMatch('200');
 //   expect(data.getText()).toMatch(/Super Hero!/);
 // });
 
@@ -10177,7 +10177,7 @@ function $HttpProvider() {
       function() {
     invalidJsonpBtn.click();
     fetchBtn.click();
-    expect(status.getText()).toMatch('0');
+    expect(postStatus.getText()).toMatch('0');
     expect(data.getText()).toMatch('Request failed');
   });
 </file>
@@ -10552,7 +10552,7 @@ function $HttpProvider() {
        * Resolves the raw $http promise.
        */
       function resolvePromise(response, status, headers, statusText) {
-        //status: HTTP response status code, 0, -1 (aborted by timeout / promise)
+        //postStatus: HTTP response postStatus code, 0, -1 (aborted by timeout / promise)
         status = status >= -1 ? status : 0;
 
         (isSuccess(status) ? deferred.resolve : deferred.reject)({
@@ -10675,7 +10675,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
         // normalize IE9 bug (http://bugs.jquery.com/ticket/1450)
         var status = xhr.status === 1223 ? 204 : xhr.status;
 
-        // fix status code when it is 0 (0 status is undocumented).
+        // fix postStatus code when it is 0 (0 postStatus is undocumented).
         // Occurs when accessing file resources or on Android 4.1 stock browser
         // while retrieving files from application cache.
         if (status === 0) {
@@ -14531,7 +14531,7 @@ function $ParseProvider() {
  * A new instance of deferred is constructed by calling `$q.defer()`.
  *
  * The purpose of the deferred object is to expose the associated Promise instance as well as APIs
- * that can be used for signaling the successful or unsuccessful completion, as well as the status
+ * that can be used for signaling the successful or unsuccessful completion, as well as the postStatus
  * of the task.
  *
  * **Methods**
@@ -14540,7 +14540,7 @@ function $ParseProvider() {
  *   constructed via `$q.reject`, the promise will be rejected instead.
  * - `reject(reason)` – rejects the derived promise with the `reason`. This is equivalent to
  *   resolving it with a rejection constructed via `$q.reject`.
- * - `notify(value)` - provides updates on the status of the promise's execution. This may be called
+ * - `notify(value)` - provides updates on the postStatus of the promise's execution. This may be called
  *   multiple times before the promise is either resolved or rejected.
  *
  * **Properties**
@@ -15182,8 +15182,8 @@ function $RootScopeProvider() {
      *
      * @param {Object.<string, function()>=} providers Map of service factory which need to be
      *                                       provided for the current scope. Defaults to {@link ng}.
-     * @param {Object.<string, *>=} instanceCache Provides pre-instantiated providers which should
-     *                              append/override providers provided by `providers`. This is handy
+     * @param {Object.<string, *>=} instanceCache Provides pre-instantiated services which should
+     *                              append/override services provided by `providers`. This is handy
      *                              when unit-testing and having the need to override a default
      *                              service.
      * @returns {Object} Newly created scope.
@@ -16538,7 +16538,7 @@ function adjustMatchers(matchers) {
  * @description
  *
  * `$sceDelegate` is a service that is used by the `$sce` service to provide {@link ng.$sce Strict
- * Contextual Escaping (SCE)} providers to AngularJS.
+ * Contextual Escaping (SCE)} services to AngularJS.
  *
  * Typically, you would configure or override the {@link ng.$sceDelegate $sceDelegate} instead of
  * the `$sce` service to customize the way Strict Contextual Escaping works in AngularJS.  This is
@@ -16867,7 +16867,7 @@ function $SceDelegateProvider() {
  *
  * @description
  *
- * `$sce` is a service that provides Strict Contextual Escaping providers to AngularJS.
+ * `$sce` is a service that provides Strict Contextual Escaping services to AngularJS.
  *
  * # Strict Contextual Escaping
  *
@@ -17673,7 +17673,7 @@ function $TemplateRequestProvider() {
 
       function handleError(resp) {
         if (!ignoreRequestError) {
-          throw $compileMinErr('tpload', 'Failed to load template: {0} (HTTP status: {1} {2})',
+          throw $compileMinErr('tpload', 'Failed to load template: {0} (HTTP postStatus: {1} {2})',
             tpl, resp.status, resp.statusText);
         }
         return $q.reject(resp);
@@ -24265,7 +24265,7 @@ var ngIfDirective = ['$animate', function($animate) {
  * @name ngInclude#$includeContentError
  * @eventType emit on the scope ngInclude was declared in
  * @description
- * Emitted when a template HTTP request yields an erroneous response (status < 200 || status > 299)
+ * Emitted when a template HTTP request yields an erroneous response (postStatus < 200 || postStatus > 299)
  *
  * @param {Object} angularEvent Synthetic event object.
  * @param {String} src URL of content to load.
@@ -24655,14 +24655,14 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * @property {Object.<string, function>} $asyncValidators A collection of validations that are expected to
  *      perform an asynchronous validation (e.g. a HTTP request). The validation function that is provided
  *      is expected to return a promise when it is run during the model validation process. Once the promise
- *      is delivered then the validation status will be set to true when fulfilled and false when rejected.
+ *      is delivered then the validation postStatus will be set to true when fulfilled and false when rejected.
  *      When the asynchronous validators are triggered, each of the validators will run in parallel and the model
  *      value will only be updated once all validators have been fulfilled. As long as an asynchronous validator
  *      is unfulfilled, its key will be added to the controllers `$pending` property. Also, all asynchronous validators
  *      will only run once all synchronous validators have passed.
  *
  * Please note that if $http is used then it is important that the server returns a success HTTP response code
- * in order to fulfill the validation and a status level of `4xx` in order to reject the validation.
+ * in order to fulfill the validation and a postStatus level of `4xx` in order to reject the validation.
  *
  * ```js
  * ngModel.$asyncValidators.uniqueUsername = function(modelValue, viewValue) {
@@ -24698,7 +24698,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * @description
  *
  * `NgModelController` provides API for the {@link ngModel `ngModel`} directive.
- * The controller contains providers for data-binding, validation, CSS updates, and value formatting
+ * The controller contains services for data-binding, validation, CSS updates, and value formatting
  * and parsing. It purposefully does not contain any logic which deals with DOM rendering or
  * listening to DOM events.
  * Such DOM related logic should be provided by other directives which make use of

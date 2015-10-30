@@ -20,7 +20,7 @@ exports.signup = function(req, res, next) {
                     }
                     req.login(parent, function(err){
                         if (err) return next(err);
-                        return res.redirect('/#!/signupChild');
+                        return res.redirect('/');
                     });
                 });
             });
@@ -45,6 +45,24 @@ exports.checkChild = function(req, res, next){
         else{
             console.log('Inside checkchild found '+child);
             return res.redirect('/#!/dashboard')
+        }
+    })
+};
+
+exports.angularCheckChild = function(req, res, next){
+    var parent_email = req.user.email;
+    models.instance.child.findOne({parent_email:parent_email}, function(err, child){
+        if(err){
+            console.log('Inside checkchild angular error '+err);
+            return res.json('{"postStatus": "error"}');
+        }
+        else if(child == undefined){
+            console.log('Inside checkchild angular undefined '+err);
+            return res.json({"status": "no_child"});
+        }
+        else{
+            console.log('Inside checkchild angular found '+child);
+            return res.json({"status": "child"});
         }
     })
 };

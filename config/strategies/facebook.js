@@ -9,7 +9,8 @@ var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     config = require('../config'),
     parents = require('../../app/controllers/parent.server.controller'),
-    models = require('express-cassandra');
+    models = require('express-cassandra'),
+    setModel = require('../../app/setModel');
 
 module.exports = function() {
     passport.use(new FacebookStrategy({
@@ -27,20 +28,11 @@ module.exports = function() {
                 if(err){
                     return done(err)
                 }
-                if (parent){
-                    return done(null, parent);
-                } else{
-                    console.log("inside new parent")
-                    var new_parent = new models.instance.parents({
-                        email : provider_data.email,
-                        firstname : provider_data.first_name,
-                        lastname : provider_data.last_name,
-                        address: provider_data.location.name,
-                        profile_photo: provider_data.picture.url,
-                        gender: provider_data.gender,
-                        facebook_id: provider_data.id
-
-                    });
+                    console.log("inside new parent");
+                var key_array = ['email','first_name','last_name','location.name','picture.data.url','gender','id'];
+                var property_array = ['email','firstname','lastname','address','profile_photo','gender','facebook_id'];
+                parents_instance = setModel(key_array, property_array,provider_data);
+                    var new_parent = new models.instance.parents(parents_instance);
                     new_parent.save(function(err){
                         if(err) {
                             console.log('Error message in signup '+err);
@@ -48,7 +40,6 @@ module.exports = function() {
                         }
                         return done(null, new_parent);
                     })
-                }
             })
         }));
 };

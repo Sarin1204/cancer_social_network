@@ -1,4 +1,5 @@
-<nav class="navbar navbar-inverse navbar-no-bg" role="navigation" style="border-color:transparent">
+<link rel="stylesheet" href="assets/css/form-elements.css">
+<nav class="navbar navbar-css navbar-inverse" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
@@ -7,12 +8,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:100px"></a>
+            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="top-navbar-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li style="padding-right:1em">
 							<span class="li-text">
 								Connect with us
 							</span>
@@ -22,13 +23,18 @@
 								<a href="http://www.youtube.com/channel/UCzIYUSSziLAfnN19wSzYqGw"><i class="fa fa-youtube"></i></a>
 							</span>
                 </li>
-                <li style="padding-left:3em">
-                    <span class="li-text">
+                <li class="profile" ng-controller="profilePhotoController">
+                    <img style="height:40px" class="img-circle" src="{{profile_photo}}">
+                </li>
+                <li style="padding-left:1em">
+                    <a href="/signout">
+                         <span class="li-text">
                         Logout
                     </span>
                     <span class="li-social">
-                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                       <i class="fa fa-sign-out"></i>
                     </span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -91,6 +97,12 @@
                                 <label for="gender">Hospital</label>
                                 <div>
                                     <input type="text" data-ng-model="hospital" id="hospital" class="form-control" placeholder="hospital">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipcode">Zipcode</label>
+                                <div>
+                                    <input type="text" data-ng-model="zipcode" id="zipcode" class="form-control" placeholder="zipcode">
                                 </div>
                             </div>
                             <div class="form-group col-md-offset-5">
