@@ -6,5 +6,8 @@ function($scope,Authentication){
     if(Authentication.user.profile_photo != undefined)
         $scope.profile_photo = Authentication.user.profile_photo;
 
-}
+    $scope.profileHref = Authentication.user.email;
+    $scope.firstName = Authentication.user.firstname;
+
+    }
 ]);

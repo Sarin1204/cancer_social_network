@@ -8,7 +8,7 @@ var models = require('express-cassandra'),
 exports.getFollowed = function(req, res, next){
     var email = req.user.email;
     console.log("Email is"+req.user.email);
-    models.instance.parent_inbound_follows.find({followed_email:email},{raw: true,select: ["follower_email"]}, function(err, followers){
+    models.instance.parent_friends.find({followed_email:email},{raw: true,select: ["follower_email"]}, function(err, followers){
         if(err){
             console.log("Error in parent_inbound_follows" + err);
             return res.json({"status": "fail"})
@@ -63,6 +63,7 @@ exports.postStatus = function(req, res){
                 return res.json({"status": "failed"})
             }
             console.log('Data updated on cluster ' + err);
+            return res.json({"status": "pass"})
         });
     });
 

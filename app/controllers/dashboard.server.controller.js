@@ -6,7 +6,7 @@ var models = require('express-cassandra');
 
 exports.showStatuses = function(req,res){
     email = req.user.email;
-    var query = {
+   /* var query = {
        timeline_email : email,
         $limit: 10
     };
@@ -19,7 +19,24 @@ exports.showStatuses = function(req,res){
             console.log("Status Query on server") + statuses;
             res.json(statuses)
         }
-    })
+    })*/
+
+    var query = 'Select DATEOF("status_update_id"), body, status_update_email, profile_photo, status_update_firstname, status_update_lastname from home_status_updates where timeline_email=? LIMIT 10'
+    var params = [email]
+    models.instance.home_status_updates.execute_query(query, params, function(err, statuses){
+        if(err){
+            console.log("Status Query failed on server");
+            res.json({"status":"fail"})
+        }
+        else {
+            for(var i=0;i<statuses.rows.length;i++){
+                statuses.rows[i]['date'] = statuses.rows[i]['DATEOF(status_update_id)'].toString().substr(0,15)
+                console.log("Status Query on server "+ JSON.stringify(statuses.rows)) ;
+            }
+
+            res.json(statuses.rows)
+        }
+    });
 };
 
 exports.getCancerType = function(req, res, next){

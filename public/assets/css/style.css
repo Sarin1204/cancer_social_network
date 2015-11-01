@@ -1,3 +1,20 @@
+p.status_info{
+	margin:0;
+	font-size:12px;
+
+}
+
+li.list-card{
+	border-radius: 0px !important;
+}
+
+div.row-sameheight {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+}
+
 div.panel-card {
 	border-bottom-color:transparent;
 	border-radius: 0px;

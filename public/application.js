@@ -2,7 +2,8 @@
  * Created by sarin on 10/21/15.
  */
 var mainApplicationModuleName = 'cancer_network';
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap','auth','users','home','signupParent','profilePhoto','signupChild','signinParent','postStatus','dashboard']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap',
+    'auth','users','home','signupParent','profilePhoto','showFriendRequests','signupChild','signinParent','postStatus','dashboard','profile']);
 
 mainApplicationModule.config(['$locationProvider','$httpProvider',
     function($locationProvider,$httpProvider){
@@ -16,7 +17,7 @@ mainApplicationModule.config(['$locationProvider','$httpProvider',
                 },
                 responseError: function(response) {
                     if (response.status === 401) {
-                        console.log("In responseError")
+                        console.log("In responseError");
                         $location.url('/');
                     }
                     return $q.reject(response);

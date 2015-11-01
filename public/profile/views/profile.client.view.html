@@ -1,0 +1,175 @@
+<nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right"  ng-controller="profilePhotoController">
+                <li style="padding-right:1em">
+							<span class="li-text">
+								Connect with us
+							</span>
+							<span class="li-social">
+								<a href="https://www.facebook.com/pages/Childrens-Cancer-Network/128082398431"><i class="fa fa-facebook"></i></a>
+								<a href="https://twitter.com/ccngold"><i class="fa fa-twitter"></i></a>
+								<a href="http://www.youtube.com/channel/UCzIYUSSziLAfnN19wSzYqGw"><i class="fa fa-youtube"></i></a>
+							</span>
+                </li>
+                <li class="profile">
+                    <a href="#!/profile/{{profileHref}}">
+                    <img style="height:40px" class="img-circle" src="{{profile_photo}}">
+                    </a>
+                </li>
+                <li style="padding:17px">
+                    <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
+                </li>
+                <li style="padding:17px">
+                    <a href="#!/dashboard">Home</a>
+                </li>
+                <li ng-controller="ModalDemoCtrl" style="padding:17px; cursor: pointer;">
+                    <i class="fa fa-users" ng-click="open()"></i>
+                </li>
+                <li style="padding-left:1em">
+                    <span class="li-text">
+                        Logout
+                    </span>
+                    <span class="li-social">
+                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div ng-controller="ProfileController" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-card panel panel-default">
+                    <div class="panel-body">
+                        <div class="row row-sameheight">
+                            <div class="col-md-2">
+                                <img style="width:160px; height:160px" class="img-thumbnail" src="{{currentProfile.profile_photo}}">
+                            </div>
+                            <div class="col-md-3">
+                                <h3 style="margin-top:54%; margin-bottom:0">{{currentProfile.firstname}} {{currentProfile.lastname}}</h3>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div ng-show="isFriend == true" class="col-md-3">
+                                <h3 style="margin-top:50%; margin-bottom:0">
+                                    <span class="label label-info">
+                                        <i class="fa fa-check"></i>Friends
+                                    </span>
+                                </h3>
+                            </div>
+                            <div ng-show="isFriend == false" class="col-md-3">
+                                <button style="margin-top:50%; margin-bottom:0" type="addFriend" class="btn btn-primary">
+                                    <i class="fa fa-user-plus"></i> Add Friend
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel-card panel panel-default">
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-card list-group-item" ng-if="currentProfile.email !== null">Email id is {{currentProfile.email}}</li>
+                            <li class="list-card list-group-item" ng-if="currentProfile.location !== null">Lives in {{currentProfile.address}}</li>
+                            <li class="list-card list-group-item" ng-if="currentChild.cancer_type !== null">Has a child with {{currentChild.cancer_type}}</li>
+                            <li class="list-card list-group-item" ng-if="currentChild.age !== null">Their child is {{currentChild.age}} years old</li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-card list-group-item" ng-if="currentProfile.interests !== null">Their child is interested in : </li>
+                            <li class="list-card list-group-item" ng-if="currentChild.interests !== null" data-ng-repeat="interest in currentChild.interests"><i class="fa fa-circle"></i> {{interest}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="panel-card panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Update Status</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form ng-controller="StatusController" role="form" data-ng-submit="post_status()"  class="registration-form">
+                            <div class="form-group">
+                                <textarea name="message" cols="40" rows="10" data-ng-model="status" id="status" class="form-control message" style="height: 62px; overflow: hidden;" placeholder="What's on your mind ?"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Post" class="btn btn-primary" style="float:right">
+                            </div>
+                            <div class="form-group">
+                                <div ng-show="showMessage" class="{{postStatusResult.type}} fadein fadeout">{{postStatusResult.msg}}</div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="panel-card panel panel-default" data-ng-repeat="status in profileStatusList">
+                    <div class="panel-heading container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 nopadding"><img style="height:40px" class="img-thumbnail" src="{{currentProfile.profile_photo}}"></div>
+                            <div class="col-md-3 nopadding">
+                                <div class="row">
+                                    <p class="status_info">{{currentProfile.firstname}} {{currentProfile.lastname}}</p>
+                                    <p class="status_info">{{status.date}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="panel-body">
+                        <div>{{status.body}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel-card panel panel-default">
+                    {{errorMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="ModalDemoCtrl">
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Pending Friend Requests!</h3>
+    </div>
+    <div class="modal-body">
+        <div data-ng-repeat="friend in friendRequests" class="panel-card panel panel-default" style="margin-bottom:0">
+            <div class="panel-body container-fluid" style="padding:0">
+                <div class="row">
+                    <div class="col-md-2"><img style="width: 80px; height:80px" class="img-thumbnail" src="{{friend.sender_profile_photo}}"></div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <a href="#!/profile/{{friend.parent_sent_email}}" ng-click="ok()"><p style="margin-top:8px">{{friend.sender_firstname}} {{friend.sender_lastname}}</p></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+</div>
