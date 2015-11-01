@@ -9,7 +9,7 @@ angular.module('postStatus').controller('StatusController',['$scope',
         $scope.showMessage = false;
         $scope.post_status = function(){
             console.log('Inside create_parent');
-            var postStatus = new Status({
+            var postStatus = new Status.PostStatus({
                 status: this.status,
                 email: Authentication.user.email
             });
@@ -28,6 +28,7 @@ angular.module('postStatus').controller('StatusController',['$scope',
                 $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);
+                Status.statusPostedVar = true;
 
             }, function(errorResponse){
                 console.log('error'+JSON.stringify(errorResponse));

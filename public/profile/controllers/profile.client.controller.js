@@ -2,11 +2,69 @@
  * Created by sarin on 10/30/15.
  */
 angular.module('profile').controller('ProfileController',['$scope',
-    '$routeParams','Profile','$q','$window', function($scope, $routeParams, Profile, $q, $window) {
+    '$routeParams','Profile','$q','$window','$timeout','Status', function($scope, $routeParams, Profile, $q, $window,$timeout,Status) {
 
         $scope.currentProfileEmail = $routeParams.profileHref;
         $scope.errorMsg = "";
         $scope.isFriend = "someValue";
+        $scope.showMessage = false;
+        $scope.Status = Status;
+        $scope.statusPostedVar = Status.statusPostedVar;
+
+        $scope.$watch('Status.statusPostedVar', function(newVal, oldVal, scope){
+           if(newVal){
+               console.log('New Value in PostStatus');
+               Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
+                   $scope.profileStatusList = response;
+                   /*console.log('profile Status List ' + JSON.stringify(response))*/
+                   Status.statusPostedVar = false;
+
+               }, function(error){
+                   console.log('Inside error');
+                   $scope.errorMsg = 'Oops! Something unexpected occured!'
+                   Status.statusPostedVar = false;
+               });
+           }
+        });
+
+        $scope.addFriend = function(){
+            var newFriend = new Profile.addFriend({
+               friendEmail :  $routeParams.profileHref
+            });
+            newFriend.$save(function(response){
+                console.log('response to addFriend'+JSON.stringify(response));
+                $scope.friendAddedResult = {type:"alert alert-success", msg: "Friend Request Sent!"}
+                $scope.showMessage = true;
+                $timeout(function() {
+                    $scope.showMessage = false;
+                }, 3000);
+
+
+            }, function(error){
+                console.log('Inside error');
+                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+            })
+        };
+
+        $scope.confirmFriend = function(){
+            var confirmFriend = new Profile.confirmFriend({
+                friendEmail :  $routeParams.profileHref
+            });
+            confirmFriend.$save(function(response){
+                console.log('response to confirmFriend'+JSON.stringify(response));
+                $scope.friendConfirmResult = {type:"alert alert-success", msg: "You are now Friends!"};
+                $scope.showMessage = true;
+                $timeout(function() {
+                    $scope.showMessage = false;
+                    $scope.RelationshipStatus ='friend';
+                }, 3000);
+
+
+            }, function(error){
+                console.log('Inside error');
+                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+            })
+        };
 
         /*Profile.currentProfile.get({
             profileEmail: $routeParams.profileHref
@@ -52,14 +110,16 @@ angular.module('profile').controller('ProfileController',['$scope',
            console.log('Inside error');
            $scope.errorMsg = 'Oops! Something unexpected occured!'
        });
-        console.log("isFriend == "+$scope.isFriend)
+        console.log("isFriend == "+$scope.isFriend);
         if($scope.currentProfileEmail != $window.user.email){
-            Profile.getFriend.get({profileEmailForFriend: $routeParams.profileHref}, function(response){
-                $scope.isFriend = response.relationship;
+            Profile.getRelationship.get({profileEmailForRelationship: $routeParams.profileHref}, function(response){
+                console.log('Relations is '+JSON.stringify(response));
+                $scope.RelationshipStatus = response.relationship;
             }, function(error){
                 console.log('Inside error for getFriend');
                 $scope.errorMsg = 'Oops! Something unexpected occured!'
-            })
+            });
+
         }
 
 

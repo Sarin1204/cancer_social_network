@@ -13,8 +13,8 @@ module.exports = function(app){
     app.route('/api/profileStatus/:profileEmailForStatus')
         .get(profile.getStatuses);
 
-    app.route('/api/friendWithProfile/:profileEmailForFriend')
-        .get(profile.findIfProfileFriend);
+    app.route('/api/profileCheckRelationship/:profileEmailForRelationship')
+        .get(profile.profileCheckFriend, profile.profileCheckPendingFriendRequestReceived, profile.profileCheckPendingFriendRequestSent);
 
     app.param('profileEmail',profile.ProfileByEmail);
     app.param('parentEmail',profile.childProfileByEmail);

@@ -57,6 +57,7 @@ module.exports = function () {
     require('../app/routes/dashboard.server.route.js')(app);
     require('../app/routes/profile.server.route.js')(app);
     require('../app/routes/showFriendRequests.server.route.js')(app);
+    require('../app/routes/addFriend.server.route.js')(app);
 
     app.use(express.static('./public'));
 

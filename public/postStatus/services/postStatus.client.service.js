@@ -3,6 +3,9 @@
  */
 angular.module('postStatus').factory('Status',['$resource',
     function($resource){
-        return $resource('api/postStatus');
+        return{
+            PostStatus: $resource('api/postStatus'),
+            statusPostedVar: false
+        }
     }
 ]);

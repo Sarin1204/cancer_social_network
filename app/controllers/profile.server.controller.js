@@ -81,31 +81,74 @@ exports.getStatuses = function(req, res){
     });
 };
 
-exports.findIfProfileFriend = function(req, res){
+exports.profileCheckFriend = function(req, res, next){
     query = {
         'follower_email' : req.user.email,
-        'followed_email' : req.params.profileEmailForFriend
+        'followed_email' : req.params.profileEmailForRelationship
     }
     models.instance.parent_friends.findOne(query, {raw :true}, function(err, relationship){
         if(err){
             console.log('Inside findIfProfileFriend server '+err);
-            return res.status(500).send({ error: 'GetStatus returned error'+err });
+            return res.status(500).send({ error: 'profileCheckFriend returned error'+err });
         }
         else if(relationship == undefined){
-            console.log('No relationship found '+JSON.stringify(relationship));
-            return res.json({"relationship" : false})
+            console.log('No friend relationship found '+JSON.stringify(relationship));
+            next();
 
         }
         else{
             console.log('Relationship found '+JSON.stringify(relationship));
-            return res.json({"relationship" : true})
+            return res.json({"relationship" : 'friend'})
         }
     })
-}
+};
+
+exports.profileCheckPendingFriendRequestReceived = function(req, res, next){
+    query = {
+        'parent_received_email' : req.user.email,
+        'parent_sent_email' : req.params.profileEmailForRelationship
+    };
+    models.instance.pending_friend_requests.findOne(query, {raw: true}, function(err, relationship){
+        if(err){
+            console.log('Inside profileCheckPendingFriendRequestReceived server '+err);
+            return res.status(500).send({ error: 'profileCheckPendingFriendRequestReceived returned error'+err });
+        }
+        else if(relationship == undefined){
+            console.log('No pending friend relationship found '+JSON.stringify(relationship));
+            next();
+        }
+        else{
+            console.log('Pending friend relationship found '+JSON.stringify(relationship));
+            return res.json({"relationship" : 'pendingFriendRequestReceived'})
+        }
+    })
+};
+
+exports.profileCheckPendingFriendRequestSent = function(req, res){
+    console.log('Inside profileCheckPendingFriendRequestSent');
+    query = {
+        'parent_received_email' : req.params.profileEmailForRelationship,
+        'parent_sent_email' : req.user.email
+    };
+    models.instance.pending_friend_requests.findOne(query, {raw: true}, function(err, relationship){
+        if(err){
+            console.log('Inside profileCheckPendingFriendRequestReceived server '+err);
+            return res.status(500).send({ error: 'profileCheckPendingFriendRequestReceived returned error'+err });
+        }
+        else if(relationship == undefined){
+            console.log('No pending friend relationship found '+JSON.stringify(relationship));
+            return res.json({"relationship" : 'none'})
+        }
+        else{
+            console.log('Pending friend relationship found '+JSON.stringify(relationship));
+            return res.json({"relationship" : 'pendingFriendRequestSent'})
+        }
+    })
+};
 
 exports.getChild = function(req, res){
     res.json(req.child);
-}
+};
 
 exports.getProfile = function(req, res){
     res.json(req.profile);

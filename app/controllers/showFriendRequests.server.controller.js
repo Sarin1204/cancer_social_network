@@ -12,9 +12,9 @@ exports.pendingFriendRequests = function(req, res){
             console.log('Inside showFriendRequests server '+err);
             return res.status(500).send({ error: 'showFriendRequests returned error'+err });
         }
-        else if(friendRequests == undefined){
+        else if(friendRequests.length == 0){
             console.log('Inside showFriendRequests undefined '+err);
-            return res.json({});
+            return res.json([]);
         }
         else{
             console.log('found friendRequests in server controller '+JSON.stringify(friendRequests));
