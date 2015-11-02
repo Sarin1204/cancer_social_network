@@ -16,13 +16,13 @@ angular.module('profile').factory('Profile', ['$resource',
                 }),
             profileStatuses: $resource('/api/profileStatus/:profileEmailForStatus', {
                 profileEmailForStatus: '@profileEmailForStatus'
-            }),
+            })/*,
             getRelationship: $resource('/api/profileCheckRelationship/:profileEmailForRelationship',{
                 profileEmailForRelationship: '@profileEmailForRelationship'
         }),
             addFriend: $resource('/api/addPendingFriendRequest/'),
 
-            confirmFriend: $resource('/api/confirmPendingFriendRequest/')
+            confirmFriend: $resource('/api/confirmPendingFriendRequest/')*/
         };
     }]);
 

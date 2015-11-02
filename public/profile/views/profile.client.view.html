@@ -63,51 +63,51 @@
                             </div>
                             <div class="col-md-3">
                             </div>
-                            <div ng-show="RelationshipStatus == 'friend'" class="col-md-3">
-                                <h3 style="margin-top:50%; margin-bottom:0">
+                            <div ng-controller="friendStatusController" class="col-md-3">
+                                <div ng-show="showMessage" class="{{friendActionResult.type}} fadein fadeout">{{friendActionResult.msg}}</div>
+                                <div ng-show="RelationshipStatus == 'friend'">
+                                    <h3 style="margin-top:50%; margin-bottom:0">
                                     <span class="label label-primary">
                                         <i class="fa fa-check"></i> Friends
                                     </span>
-                                </h3>
-                            </div>
-                            <div ng-show="RelationshipStatus == 'none'" class="col-md-3">
-                                <button style="margin-top:50%; margin-bottom:0" type="addFriend" class="btn btn-primary" ng-click="addFriend()">
-                                    <i class="fa fa-user-plus"></i> Add Friend
-                                </button>
-                                    <div ng-show="showMessage" class="{{friendAddedResult.type}} fadein fadeout">{{friendAddedResult.msg}}</div>
-                            </div>
-                            <div ng-show="RelationshipStatus == 'pendingFriendRequestReceived'" class="col-md-3">
-                                <div class="panel-card panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">Pending Friend Request</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <button class="btn btn-success" ng-click='confirmFriend()'>
-                                                    <i class="fa fa-user-plus"></i>Confirm
-                                                </button>
-                                                <div ng-show="showMessage" class="{{friendConfirmResult.type}} fadein fadeout">{{friendConfirmResult.msg}}</div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-user-times"></i>Decline
-                                                </button>
+                                    </h3>
+                                </div>
+                                <div ng-show="RelationshipStatus == 'none'">
+                                    <button style="margin-top:50%; margin-bottom:0" type="addFriend" class="btn btn-primary" ng-click="addFriend()">
+                                        <i class="fa fa-user-plus"></i> Add Friend
+                                    </button>
+                                </div>
+                                <div ng-show="RelationshipStatus == 'pendingFriendRequestReceived'">
+                                    <div class="panel-card panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">Pending Friend Request</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <button class="btn btn-success" ng-click='confirmFriend()'>
+                                                        <i class="fa fa-user-plus"></i>Confirm
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="btn btn-danger" ng-click='deleteFriend()'>
+                                                        <i class="fa fa-user-times"></i> Decline
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div ng-show="RelationshipStatus == 'pendingFriendRequestSent'" class="col-md-3">
-                                <div class="panel-card panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">Friend Request Sent</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <button class="btn btn-danger">
-                                            <i class="fa fa-user-times"></i> Delete
-                                        </button>
-                                        <!--<div ng-show="showMessage" class="{{friendConfirmResult.type}} fadein fadeout">{{friendConfirmResult.msg}}</div>-->
+                                <div ng-show="RelationshipStatus == 'pendingFriendRequestSent'">
+                                    <div class="panel-card panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">Friend Request Sent</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <button class="btn btn-danger" ng-click='deleteFriend()'>
+                                                <i class="fa fa-user-times"></i> Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

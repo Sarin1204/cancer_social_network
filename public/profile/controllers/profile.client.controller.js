@@ -27,7 +27,7 @@ angular.module('profile').controller('ProfileController',['$scope',
            }
         });
 
-        $scope.addFriend = function(){
+       /* $scope.addFriend = function(){
             var newFriend = new Profile.addFriend({
                friendEmail :  $routeParams.profileHref
             });
@@ -65,6 +65,27 @@ angular.module('profile').controller('ProfileController',['$scope',
                 $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
             })
         };
+
+        $scope.deleteFriend = function(){
+            var confirmFriend = new Profile.deleteFriend({
+                friendEmail :  $routeParams.profileHref
+            });
+            confirmFriend.$save(function(response){
+                console.log('response to confirmFriend'+JSON.stringify(response));
+                $scope.friendConfirmResult = {type:"alert alert-success", msg: "You are now Friends!"};
+                $scope.showMessage = true;
+                $timeout(function() {
+                    $scope.showMessage = false;
+                    $scope.RelationshipStatus ='friend';
+                }, 3000);
+
+
+            }, function(error){
+                console.log('Inside error');
+                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+            })
+        };*/
+
 
         /*Profile.currentProfile.get({
             profileEmail: $routeParams.profileHref
@@ -110,7 +131,7 @@ angular.module('profile').controller('ProfileController',['$scope',
            console.log('Inside error');
            $scope.errorMsg = 'Oops! Something unexpected occured!'
        });
-        console.log("isFriend == "+$scope.isFriend);
+        /*console.log("isFriend == "+$scope.isFriend);
         if($scope.currentProfileEmail != $window.user.email){
             Profile.getRelationship.get({profileEmailForRelationship: $routeParams.profileHref}, function(response){
                 console.log('Relations is '+JSON.stringify(response));
@@ -120,7 +141,7 @@ angular.module('profile').controller('ProfileController',['$scope',
                 $scope.errorMsg = 'Oops! Something unexpected occured!'
             });
 
-        }
+        }*/
 
 
 
