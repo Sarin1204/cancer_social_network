@@ -65,7 +65,7 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
             })
         };
 
-        $scope.deleteFriend = function(){
+        $scope.deleteFriendRequest = function(){
             if($scope.RelationshipStatus == 'pendingFriendRequestSent'){
                 var parent_sent_email = Authentication.user.email,
                     parent_received_email = $routeParams.profileHref
@@ -74,7 +74,7 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
                 var parent_sent_email = $routeParams.profileHref,
                     parent_received_email = Authentication.user.email
             }
-            var deleteFriend = new FriendStatus.deleteFriend({
+            var deleteFriend = new FriendStatus.deleteFriendRequest({
                 parent_sent_email :  parent_sent_email,
                 parent_received_email : parent_received_email
             });
@@ -89,10 +89,29 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
 
 
             }, function(error){
-                console.log('Inside error');
+                console.log('Inside error deleteFriendRequest');
                 $scope.friendActionResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
             })
         };
+
+        $scope.deleteFriendship = function(){
+
+            var deleteFriendship = new FriendStatus.deleteFriendship({
+                friendBeingDeleted : $routeParams.profileHref
+            });
+            deleteFriendship.$save(function(response){
+                console.log('Inside success deleteFriendShip'+response);
+                $scope.friendActionResult = {type:"alert alert-success", msg: "Friendship Deleted.."};
+                $scope.showMessage = true;
+                $scope.RelationshipStatus ='none';
+                $timeout(function() {
+                    $scope.showMessage = false;
+                }, 3000);
+            },function(error){
+                console.log('Inside error deleteFriendship'+JSON.stringify(error));
+                $scope.friendActionResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+            })
+        }
 
 
 

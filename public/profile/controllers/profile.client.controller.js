@@ -33,6 +33,12 @@ angular.module('profile').controller('ProfileController',['$scope',
 
         });
 
+        $scope.dynamicPopover = {
+            content: 'Hello, World!',
+            templateUrl: 'myPopoverTemplate.html',
+            title: 'Title'
+        };
+
 
 
         /*Profile.currentProfile.get({

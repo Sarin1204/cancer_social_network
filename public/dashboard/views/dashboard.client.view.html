@@ -131,7 +131,7 @@
 <div ng-controller="ModalDemoCtrl">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">Pending Friend Requests!</h3>
+            <h3 class="modal-title">{{titleMsg}}</h3>
         </div>
         <div class="modal-body">
             <div data-ng-repeat="friend in friendRequests" class="panel-card panel panel-default" style="margin-bottom:0">

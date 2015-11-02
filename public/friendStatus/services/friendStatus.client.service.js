@@ -11,7 +11,9 @@ angular.module('friendStatus').factory('FriendStatus',['$resource',
 
             confirmFriend: $resource('/api/confirmPendingFriendRequest/'),
 
-            deleteFriend: $resource('/api/deletePendingFriendRequest')
+            deleteFriendRequest: $resource('/api/deletePendingFriendRequest'),
+
+            deleteFriendship: $resource('/api/deleteFriendship')
 
         };
     }

@@ -20,4 +20,37 @@ exports.deletePendingFriendRequest = function(req, res) {
         }
     });
 
-}
+};
+
+exports.deleteFriendship = function(req, res) {
+
+    console.log("Inside deleteFriendship"+req.user.email + req.body.friendBeingDeleted);
+    var queries = [
+        {
+            query: 'Delete from parent_friends where followed_email = ? and follower_email = ?',
+            params: [req.user.email, req.body.friendBeingDeleted]
+        },
+
+        {
+            query: 'Delete from parent_friends where followed_email = ? and follower_email = ?',
+            params: [req.body.friendBeingDeleted, req.user.email]
+
+        }
+
+    ];
+
+    models.instance.parent_friends.get_cql_client(function(err, client){
+        client.batch(queries, { prepare: true }, function(err) {
+            if(err){
+                console.log('Deletion of friendship on Parent friends'+err);
+                return res.status(500).send({ error: 'Deletion of friendship on Parent friends successful'+err });
+            }
+            else{
+                console.log('Deletion of friendship on Parent friends successful');
+                return res.json({"status": "pass"})
+            }
+
+        });
+    });
+
+};

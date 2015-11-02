@@ -7,5 +7,8 @@ var deleteFriend = require('../controllers/deleteFriend.server.controller.js');
 module.exports = function(app){
 
     app.route('/api/deletePendingFriendRequest')
-        .post(deleteFriend.deletePendingFriendRequest)
+        .post(deleteFriend.deletePendingFriendRequest);
+
+    app.route('/api/deleteFriendship')
+        .post(deleteFriend.deleteFriendship);
 };
