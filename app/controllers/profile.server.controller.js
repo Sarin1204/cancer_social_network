@@ -146,6 +146,32 @@ exports.profileCheckPendingFriendRequestSent = function(req, res){
     })
 };
 
+exports.makeFriendGrid = function(req, res){
+    var followers = req.followers;
+    var followerDetails = [];
+    var lock = followers.length;
+    for(var i=0; i<followers.length;i++){
+        console.log('followers are '+followers[i]);
+        models.instance.parents.findOne({email: followers[i]},{raw: true}, function(err, parent){
+            if(err){
+                console.log('Inside makeFriendGrid server '+err);
+                return res.status(500).send({ error: 'makeFriendGrid returned error'+err });
+            }
+            else{
+                console.log('parent details in makeFriendGrid are '+JSON.stringify(parent));
+                followerDetails.push(parent);
+                lock-=1
+                if(lock==0){
+                    console.log("makeFriendGrid results == "+followerDetails);
+                    return res.json(followerDetails);
+                }
+            }
+        });
+    }
+
+
+};
+
 exports.getChild = function(req, res){
     res.json(req.child);
 };

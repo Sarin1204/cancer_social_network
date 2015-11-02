@@ -1,3 +1,27 @@
+.bgimg {
+	background: rgba(76,76,76,1);
+	background: -moz-linear-gradient(left, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 15%, rgba(71,71,71,1) 23%, rgba(44,44,44,1) 35%, rgba(43,43,43,1) 38%, rgba(17,17,17,1) 46%, rgba(19,19,19,1) 48%, rgba(28,28,28,1) 58%, rgba(0,0,0,1) 68%, rgba(3,3,3,1) 82%, rgba(19,19,19,1) 95%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(76,76,76,1)), color-stop(15%, rgba(89,89,89,1)), color-stop(23%, rgba(71,71,71,1)), color-stop(35%, rgba(44,44,44,1)), color-stop(38%, rgba(43,43,43,1)), color-stop(46%, rgba(17,17,17,1)), color-stop(48%, rgba(19,19,19,1)), color-stop(58%, rgba(28,28,28,1)), color-stop(68%, rgba(0,0,0,1)), color-stop(82%, rgba(3,3,3,1)), color-stop(95%, rgba(19,19,19,1)));
+	background: -webkit-linear-gradient(left, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 15%, rgba(71,71,71,1) 23%, rgba(44,44,44,1) 35%, rgba(43,43,43,1) 38%, rgba(17,17,17,1) 46%, rgba(19,19,19,1) 48%, rgba(28,28,28,1) 58%, rgba(0,0,0,1) 68%, rgba(3,3,3,1) 82%, rgba(19,19,19,1) 95%);
+	background: -o-linear-gradient(left, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 15%, rgba(71,71,71,1) 23%, rgba(44,44,44,1) 35%, rgba(43,43,43,1) 38%, rgba(17,17,17,1) 46%, rgba(19,19,19,1) 48%, rgba(28,28,28,1) 58%, rgba(0,0,0,1) 68%, rgba(3,3,3,1) 82%, rgba(19,19,19,1) 95%);
+	background: -ms-linear-gradient(left, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 15%, rgba(71,71,71,1) 23%, rgba(44,44,44,1) 35%, rgba(43,43,43,1) 38%, rgba(17,17,17,1) 46%, rgba(19,19,19,1) 48%, rgba(28,28,28,1) 58%, rgba(0,0,0,1) 68%, rgba(3,3,3,1) 82%, rgba(19,19,19,1) 95%);
+	background: linear-gradient(to right, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 15%, rgba(71,71,71,1) 23%, rgba(44,44,44,1) 35%, rgba(43,43,43,1) 38%, rgba(17,17,17,1) 46%, rgba(19,19,19,1) 48%, rgba(28,28,28,1) 58%, rgba(0,0,0,1) 68%, rgba(3,3,3,1) 82%, rgba(19,19,19,1) 95%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1 );
+}
+
+.thumbnailFriend {
+	position: relative;
+}
+
+.captionFriend {
+	position: absolute;
+	top: 80%;
+	left: 5%;
+	width: 100%;
+	font-family: 'tahoma';
+	font-size:14px;
+	color:white;
+}
 p.status_info{
 	margin:0;
 	font-size:12px;

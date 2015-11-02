@@ -53,6 +53,7 @@ module.exports = function () {
     require('../app/routes/signupParent.server.route.js')(app);
     require('../app/routes/signupChild.server.route.js')(app);
     require('../app/routes/signinParent.server.route.js')(app);
+    require('../app/routes/findFriend.server.route.js')(app);
     require('../app/routes/postStatus.server.route.js')(app);
     require('../app/routes/dashboard.server.route.js')(app);
     require('../app/routes/profile.server.route.js')(app);

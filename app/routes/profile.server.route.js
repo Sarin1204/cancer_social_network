@@ -1,7 +1,8 @@
 /**
  * Created by sarin on 10/30/15.
  */
-var profile = require('../controllers/profile.server.controller.js');
+var profile = require('../controllers/profile.server.controller.js'),
+    findFriend = require('../controllers/findFriend.server.controller.js');
 
 module.exports = function(app){
     app.route('/api/profile/:profileEmail')
@@ -15,6 +16,9 @@ module.exports = function(app){
 
     app.route('/api/profileCheckRelationship/:profileEmailForRelationship')
         .get(profile.profileCheckFriend, profile.profileCheckPendingFriendRequestReceived, profile.profileCheckPendingFriendRequestSent);
+
+    app.route('/api/profile/getFriendsForProfile/:limit')
+        .get(findFriend.getFollowed, profile.makeFriendGrid);
 
     app.param('profileEmail',profile.ProfileByEmail);
     app.param('parentEmail',profile.childProfileByEmail);

@@ -5,7 +5,7 @@
 var models = require('express-cassandra'),
     uuid = require('node-uuid');
 
-exports.getFollowed = function(req, res, next){
+/*exports.getFollowed = function(req, res, next){
     var email = req.user.email;
     console.log("Email is"+req.user.email);
     models.instance.parent_friends.find({followed_email:email},{raw: true,select: ["follower_email"]}, function(err, followers){
@@ -24,7 +24,7 @@ exports.getFollowed = function(req, res, next){
             next();
         }
     });
-};
+};*/
 
 exports.postStatus = function(req, res){
     console.log("Inside postStatus and body is "+JSON.stringify(req.body));

@@ -3,7 +3,8 @@
  */
 
 var dashboard = require('../controllers/dashboard.server.controller.js'),
-    postStatus = require('../controllers/postStatus.server.controller.js');
+    postStatus = require('../controllers/postStatus.server.controller.js'),
+    findFriend = require('../controllers/findFriend.server.controller.js');
 
 module.exports = function(app){
 
@@ -11,6 +12,6 @@ module.exports = function(app){
         .get(dashboard.showStatuses);
 
     app.route('/api/friendRecommend')
-        .get(dashboard.getCancerType,postStatus.getFollowed,dashboard.friendRecommend);
+        .get(dashboard.getCancerType,findFriend.getFollowed,dashboard.friendRecommend);
 
 };

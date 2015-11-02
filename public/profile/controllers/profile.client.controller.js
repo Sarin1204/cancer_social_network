@@ -6,8 +6,6 @@ angular.module('profile').controller('ProfileController',['$scope',
 
         $scope.currentProfileEmail = $routeParams.profileHref;
         $scope.errorMsg = "";
-        $scope.isFriend = "someValue";
-        $scope.showMessage = false;
         $scope.Status = Status;
         $scope.statusPostedVar = Status.statusPostedVar;
 
@@ -21,70 +19,20 @@ angular.module('profile').controller('ProfileController',['$scope',
 
                }, function(error){
                    console.log('Inside error');
-                   $scope.errorMsg = 'Oops! Something unexpected occured!'
+                   $scope.errorMsg = 'Oops! Something unexpected occured!';
                    Status.statusPostedVar = false;
                });
            }
         });
 
-       /* $scope.addFriend = function(){
-            var newFriend = new Profile.addFriend({
-               friendEmail :  $routeParams.profileHref
-            });
-            newFriend.$save(function(response){
-                console.log('response to addFriend'+JSON.stringify(response));
-                $scope.friendAddedResult = {type:"alert alert-success", msg: "Friend Request Sent!"}
-                $scope.showMessage = true;
-                $timeout(function() {
-                    $scope.showMessage = false;
-                }, 3000);
+        Profile.getFriends.query({limit: 6},function(response){
+            console.log('getFriends client side response == '+JSON.stringify(response));
+            $scope.friendGrid = response;
+        }, function(error){
+            console.log('getFriends client side error == '+JSON.stringify(error))
 
+        });
 
-            }, function(error){
-                console.log('Inside error');
-                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
-            })
-        };
-
-        $scope.confirmFriend = function(){
-            var confirmFriend = new Profile.confirmFriend({
-                friendEmail :  $routeParams.profileHref
-            });
-            confirmFriend.$save(function(response){
-                console.log('response to confirmFriend'+JSON.stringify(response));
-                $scope.friendConfirmResult = {type:"alert alert-success", msg: "You are now Friends!"};
-                $scope.showMessage = true;
-                $timeout(function() {
-                    $scope.showMessage = false;
-                    $scope.RelationshipStatus ='friend';
-                }, 3000);
-
-
-            }, function(error){
-                console.log('Inside error');
-                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
-            })
-        };
-
-        $scope.deleteFriend = function(){
-            var confirmFriend = new Profile.deleteFriend({
-                friendEmail :  $routeParams.profileHref
-            });
-            confirmFriend.$save(function(response){
-                console.log('response to confirmFriend'+JSON.stringify(response));
-                $scope.friendConfirmResult = {type:"alert alert-success", msg: "You are now Friends!"};
-                $scope.showMessage = true;
-                $timeout(function() {
-                    $scope.showMessage = false;
-                    $scope.RelationshipStatus ='friend';
-                }, 3000);
-
-
-            }, function(error){
-                console.log('Inside error');
-                $scope.friendAddedResult = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
-            })
-        };*/
 
 
         /*Profile.currentProfile.get({
@@ -131,20 +79,6 @@ angular.module('profile').controller('ProfileController',['$scope',
            console.log('Inside error');
            $scope.errorMsg = 'Oops! Something unexpected occured!'
        });
-        /*console.log("isFriend == "+$scope.isFriend);
-        if($scope.currentProfileEmail != $window.user.email){
-            Profile.getRelationship.get({profileEmailForRelationship: $routeParams.profileHref}, function(response){
-                console.log('Relations is '+JSON.stringify(response));
-                $scope.RelationshipStatus = response.relationship;
-            }, function(error){
-                console.log('Inside error for getFriend');
-                $scope.errorMsg = 'Oops! Something unexpected occured!'
-            });
-
-        }*/
-
-
-
     }
 ]);
 

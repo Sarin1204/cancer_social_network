@@ -52,14 +52,14 @@
     <div ng-controller="ProfileController" class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel-card panel panel-default">
+                <div class="panel-card panel bgimg">
                     <div class="panel-body">
                         <div class="row row-sameheight">
                             <div class="col-md-2">
-                                <img style="width:160px; height:160px" class="img-thumbnail" src="{{currentProfile.profile_photo}}">
+                                <img class="img-thumbnail img-responsive" src="{{currentProfile.profile_photo}}">
                             </div>
                             <div class="col-md-3">
-                                <h3 style="margin-top:54%; margin-bottom:0">{{currentProfile.firstname}} {{currentProfile.lastname}}</h3>
+                                <h3 style="margin-top:54%; margin-bottom:0; color:white">{{currentProfile.firstname}} {{currentProfile.lastname}}</h3>
                             </div>
                             <div class="col-md-3">
                             </div>
@@ -174,8 +174,22 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel-card panel panel-default">
-                    {{errorMsg}}
+                <div class="container-fluid nopadding">
+                    <div class="row nopadding" ng-repeat="friendRow in friendGrid track by $index" ng-if="$index % 2 == 0">
+                        <div class="panel-card panel nopadding" style="background-color:transparent">
+                            <div class="panel-body nopadding">
+                                <div class="col-md-6 nopadding thumbnailFriend"
+                                     ng-repeat ="i in [$index, $index + 1]" ng-if="friendGrid[i] != null">
+                                    <a href="#!/profile/{{friendGrid[i].email}}">
+                                        <img class="img-thumbnail" style="width:130px; height:130px; cursor:pointer;" src="{{friendGrid[i].profile_photo}}">
+                                    </a>
+                                    <div class="captionFriend">
+                                        <p>{{friendGrid[i].firstname}} {{friendGrid[i].lastname}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
