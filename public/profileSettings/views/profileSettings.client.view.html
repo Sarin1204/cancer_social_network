@@ -154,18 +154,21 @@
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <button type="button" class="btn btn-default" ng-click="editableParentForm.$show()" ng-show="!editableParentForm.$visible">
-                                                Edit
-                                            </button>
-                                        </div>
-                                        <span ng-show="editableParentForm.$visible">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-primary" ng-click="editableParentForm.$show()" ng-show="!editableParentForm.$visible">
+                                                    <i class="fa fa-pencil"></i> Edit
+                                                </button>
+                                                <span ng-show="editableParentForm.$visible">
                                      <button type="submit" class="btn btn-primary" ng-disabled="editableParentForm.$waiting">
-                                         Save
+                                         <i class="fa fa-floppy-o"></i> Save
                                      </button>
-                                     <button type="button" class="btn btn-default" ng-disabled="editableParentForm.$waiting" ng-click="editableParentForm.$cancel()">
-                                         Cancel
+                                     <button type="button" class="btn btn-danger" ng-disabled="editableParentForm.$waiting" ng-click="editableParentForm.$cancel()">
+                                         <i class="fa fa-ban"></i> Cancel
                                      </button>
                                         </span>
+                                            </div>
+
+                                        </div>
                                     </li>
 
                                 </ul>
@@ -274,18 +277,21 @@
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <button type="button" class="btn btn-default" ng-click="editableChildForm.$show()" ng-show="!editableChildForm.$visible">
-                                                Edit
-                                            </button>
-                                        </div>
-                                        <span ng-show="editableChildForm.$visible">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-primary" ng-click="editableChildForm.$show()" ng-show="!editableChildForm.$visible">
+                                                    <i class="fa fa-pencil"></i> Edit
+                                                </button>
+                                                <span ng-show="editableChildForm.$visible">
                                      <button type="submit" class="btn btn-primary" ng-disabled="editableChildForm.$waiting">
-                                         Save
+                                         <i class="fa fa-floppy-o"></i> Save
                                      </button>
-                                     <button type="button" class="btn btn-default" ng-disabled="editableChildForm.$waiting" ng-click="editableChildForm.$cancel()">
-                                         Cancel
+                                     <button type="button" class="btn btn-danger" ng-disabled="editableChildForm.$waiting" ng-click="editableChildForm.$cancel()">
+                                         <i class="fa fa-ban"></i> Cancel
                                      </button>
                                         </span>
+                                            </div>
+
+                                        </div>
                                     </li>
 
                                 </ul>

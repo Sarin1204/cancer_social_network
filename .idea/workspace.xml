@@ -24,8 +24,8 @@
       <file leaf-file-name="profileSettings.client.view.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/profileSettings/views/profileSettings.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.516129">
-              <caret line="67" column="67" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.22222222">
+              <caret line="280" column="158" selection-start-line="280" selection-start-column="158" selection-end-line="280" selection-end-column="158" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
@@ -1014,8 +1014,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/profileSettings/views/profileSettings.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.516129">
-          <caret line="67" column="67" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.22222222">
+          <caret line="280" column="158" selection-start-line="280" selection-start-column="158" selection-end-line="280" selection-end-column="158" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
