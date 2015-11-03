@@ -2,8 +2,8 @@
  * Created by sarin on 10/21/15.
  */
 var mainApplicationModuleName = 'cancer_network';
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap',
-    'auth','users','home','signupParent','profilePhoto','showFriendRequests','friendStatus','signupChild','signinParent','postStatus','dashboard','profile']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap','xeditable',
+    'auth','users','home','signupParent','profilePhoto','showFriendRequests','friendStatus','signupChild','signinParent','postStatus','dashboard','profile','profileSettings']);
 
 mainApplicationModule.config(['$locationProvider','$httpProvider',
     function($locationProvider,$httpProvider){
@@ -31,6 +31,10 @@ if (window.location.hash === '#_=_') window.location.hash = '#!';
 
 angular.element(document).ready(function(){
     angular.bootstrap(document, [mainApplicationModuleName]);
+});
+
+mainApplicationModule.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
 });
 
 

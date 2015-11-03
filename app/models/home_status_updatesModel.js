@@ -12,5 +12,6 @@ module.exports = {
         "status_update_lastname" : {"type": "text"},
         "profile_photo" : {"type": "text"}
     },
-    "key" : [["timeline_email"],"status_update_id"]
+    "key" : [["timeline_email"],"status_update_id"],
+    "indexes" : ["status_update_email"]
 };

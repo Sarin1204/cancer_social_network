@@ -1,0 +1,371 @@
+<nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right"  ng-controller="profilePhotoController">
+                <li style="padding-right:1em">
+							<span class="li-text">
+								Connect with us
+							</span>
+							<span class="li-social">
+								<a href="https://www.facebook.com/pages/Childrens-Cancer-Network/128082398431"><i class="fa fa-facebook"></i></a>
+								<a href="https://twitter.com/ccngold"><i class="fa fa-twitter"></i></a>
+								<a href="http://www.youtube.com/channel/UCzIYUSSziLAfnN19wSzYqGw"><i class="fa fa-youtube"></i></a>
+							</span>
+                </li>
+                <li class="profile">
+                    <a href="#!/profile/{{profileHref}}">
+                        <img style="height:40px" class="img-circle" src="{{profile_photo}}">
+                    </a>
+                </li>
+                <li style="padding:17px">
+                    <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
+                </li>
+                <li style="padding:17px">
+                    <a href="#!/dashboard">Home</a>
+                </li>
+                <li ng-controller="ModalDemoCtrl" style="padding:17px; cursor: pointer;">
+                    <i class="fa fa-users" ng-click="open()"></i>
+                </li>
+                <li style="padding:17px">
+                    <a href="#!/profileSettings/">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                </li>
+                <li style="padding-left:1em">
+                    <span class="li-text">
+                        Logout
+                    </span>
+                    <span class="li-social">
+                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div class="inner-bg">
+        <div ng-controller="ProfileSettingsController" class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel-card panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 style="margin-top:10px">Parent Details</h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fa fa-pencil-square-o fa-3x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form editable-form name="editableParentForm" onaftersave="saveParent()" role="form"  class="registration-form">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Email: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.email" e-name="email" e-required>{{ parent.name || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Password: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.password" e-name="password" e-required>{{ parent.password || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Firstname: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.firstname" e-name="firstname" e-required>{{ parent.firstname || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Lastname: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.lastname" e-name="lastname" e-required>{{ parent.lastname || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Gender: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.gender" e-name="gender" e-required>{{ parent.gender || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Phone: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.phone" e-name="phone" e-required>{{ parent.phone || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Address: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.address" e-name="address" e-required>{{ parent.address || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Zipcode: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="parent.zipcode" e-name="zipcode" e-required>{{ parent.zipcode || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <button type="button" class="btn btn-default" ng-click="editableParentForm.$show()" ng-show="!editableParentForm.$visible">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <span ng-show="editableParentForm.$visible">
+                                     <button type="submit" class="btn btn-primary" ng-disabled="editableParentForm.$waiting">
+                                         Save
+                                     </button>
+                                     <button type="button" class="btn btn-default" ng-disabled="editableParentForm.$waiting" ng-click="editableParentForm.$cancel()">
+                                         Cancel
+                                     </button>
+                                        </span>
+                                    </li>
+
+                                </ul>
+
+                                <div class="form-group">
+                                    <div ng-show="showMessage" class="{{postStatusResult.type}} fadein fadeout">{{postStatusResult.msg}}</div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class = "col-sm-6">
+                    <div class="panel-card panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 style="margin-top:10px">Child Details</h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fa fa-pencil-square-o fa-3x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form editable-form name="editableChildForm" onaftersave="saveChild()" role="form"  class="registration-form">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Firstname: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.firstname" e-name="firstname" e-required>{{ child.firstname || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Lastname: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.lastname" e-name="lastname" e-required>{{ child.lastname || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Cancer Type: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.cancer_type" e-name="cancer_type" e-required>{{ child.cancer_type || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Age: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.age" e-name="age" e-required>{{ child.age || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Gender: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.gender" e-name="gender" e-required>{{ child.gender || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="title">Interests: </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span editable-text="child.interests" e-name="interests" e-required>{{ child.interests || 'empty' }}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="title">Hospital: </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span editable-text="child.hospital" e-name="hospital" e-required>{{ child.hospital || 'empty' }}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="title">Zipcode: </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span editable-text="child.zipcode" e-name="zipcode" e-required>{{ child.zipcode || 'empty' }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <button type="button" class="btn btn-default" ng-click="editableChildForm.$show()" ng-show="!editableChildForm.$visible">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <span ng-show="editableChildForm.$visible">
+                                     <button type="submit" class="btn btn-primary" ng-disabled="editableChildForm.$waiting">
+                                         Save
+                                     </button>
+                                     <button type="button" class="btn btn-default" ng-disabled="editableChildForm.$waiting" ng-click="editableChildForm.$cancel()">
+                                         Cancel
+                                     </button>
+                                        </span>
+                                    </li>
+
+                                </ul>
+
+                                <div class="form-group">
+                                    <div ng-show="showMessage" class="{{postStatusResult.type}} fadein fadeout">{{postStatusResult.msg}}</div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{titleMsg}}</h3>
+        </div>
+        <div class="modal-body">
+            <div data-ng-repeat="friend in friendRequests" class="panel-card panel panel-default" style="margin-bottom:0">
+                <div class="panel-body container-fluid" style="padding:0">
+                    <div class="row">
+                        <div class="col-md-2"><img style="width: 80px; height:80px" class="img-thumbnail" src="{{friend.sender_profile_photo}}"></div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <a href="#!/profile/{{friend.parent_sent_email}}" ng-click="ok()"><p style="margin-top:8px">{{friend.sender_firstname}} {{friend.sender_lastname}}</p></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+<script type="text/ng-template" id="friend.html">
+    <button class="btn btn-danger" ng-click="deleteFriendship()"><i class="fa fa-user-times"></i> Delete </button>
+</script>
+<script type="text/ng-template" id="friendRequestSent.html">
+    <div class="panel-card panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Friend Request Sent</h4>
+        </div>
+        <div class="panel-body">
+            <button class="btn btn-danger" ng-click='deleteFriendRequest()'>
+                <i class="fa fa-user-times"></i> Delete
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="friendRequestReceived.html">
+    <div class="panel-card panel panel-default form-group">
+        <div class="panel-heading">
+            <h4 class="panel-title">Pending Friend Request</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success" ng-click='confirmFriend()'>
+                        <i class="fa fa-user-plus"></i>Confirm
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger" ng-click='deleteFriendRequest()'>
+                        <i class="fa fa-user-times"></i> Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

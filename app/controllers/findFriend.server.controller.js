@@ -6,7 +6,7 @@ var models = require('express-cassandra');
 
 exports.getFollowed = function(req, res, next){
 
-    if( req.profile.email != undefined){
+    if( 'profile' in req){
         var email = req.profile.email;
     }
     else{

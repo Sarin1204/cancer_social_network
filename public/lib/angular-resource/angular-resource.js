@@ -167,7 +167,7 @@ function shallowClearAndCopy(src, dst) {
  *     `response` and `responseError`. Both `response` and `responseError` interceptors get called
  *     with `http response` object. See {@link ng.$http $http interceptors}.
  *
- * @param {Object} options Hash with custom settings that should extend the
+ * @param {Object} options Hash with custom profileSettings that should extend the
  *   default `$resourceProvider` behavior.  The only supported option is
  *
  *   Where:
