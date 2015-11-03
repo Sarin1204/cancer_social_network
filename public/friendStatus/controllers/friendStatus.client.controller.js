@@ -31,9 +31,12 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
             });
             newFriend.$save(function(response){
                 console.log('response to addFriend'+JSON.stringify(response));
-                $scope.friendActionResult = {type:"alert alert-success", msg: "Friend Request Sent!"}
-                $scope.showMessage = true;
-                $scope.RelationshipStatus = 'pendingFriendRequestSent'
+                $scope.friendActionResult = {type:"alert alert-success", msg: "Friend Request Sent!"};
+                $timeout(function(){
+                    $scope.showMessage = true;
+                    $scope.RelationshipStatus = 'pendingFriendRequestSent'
+                }, 300);
+
                 $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);
@@ -52,8 +55,12 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
             confirmFriend.$save(function(response){
                 console.log('response to confirmFriend'+JSON.stringify(response));
                 $scope.friendActionResult = {type:"alert alert-success", msg: "You are now Friends!"};
-                $scope.showMessage = true;
-                $scope.RelationshipStatus ='Friend';
+
+                $timeout(function(){
+                    $scope.showMessage = true;
+                    $scope.RelationshipStatus ='friend';
+                }, 300);
+
                 $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);
@@ -81,8 +88,11 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
             deleteFriend.$save(function(response){
                 console.log('response to deleteFriend'+JSON.stringify(response));
                 $scope.friendActionResult = {type:"alert alert-success", msg: "Friend Request Deleted.."};
-                $scope.showMessage = true;
-                $scope.RelationshipStatus ='none';
+                $timeout(function(){
+                    $scope.showMessage = true;
+                    $scope.RelationshipStatus ='none';
+                }, 300);
+
                 $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);
@@ -102,8 +112,12 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
             deleteFriendship.$save(function(response){
                 console.log('Inside success deleteFriendShip'+response);
                 $scope.friendActionResult = {type:"alert alert-success", msg: "Friendship Deleted.."};
-                $scope.showMessage = true;
-                $scope.RelationshipStatus ='none';
+
+                $timeout(function(){
+                    $scope.showMessage = true;
+                    $scope.RelationshipStatus ='none';
+                }, 300);
+
                 $timeout(function() {
                     $scope.showMessage = false;
                 }, 3000);

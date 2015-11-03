@@ -25,7 +25,7 @@ angular.module('profile').controller('ProfileController',['$scope',
            }
         });
 
-        Profile.getFriends.query({limit: 6},function(response){
+        Profile.getFriends.query({profileEmail: $routeParams.profileHref, limit: 6},function(response){
             console.log('getFriends client side response == '+JSON.stringify(response));
             $scope.friendGrid = response;
         }, function(error){
@@ -33,9 +33,21 @@ angular.module('profile').controller('ProfileController',['$scope',
 
         });
 
-        $scope.dynamicPopover = {
+        $scope.friendButton = {
             content: 'Hello, World!',
-            templateUrl: 'myPopoverTemplate.html',
+            templateUrl: 'friend.html',
+            title: 'Title'
+        };
+
+        $scope.pendingFriendRequestSent = {
+            content: 'Hello, World!',
+            templateUrl: 'friendRequestSent.html',
+            title: 'Title'
+        };
+
+        $scope.pendingFriendRequestReceived = {
+            content: 'Hello, World!',
+            templateUrl: 'friendRequestReceived.html',
             title: 'Title'
         };
 

@@ -17,7 +17,8 @@ angular.module('profile').factory('Profile', ['$resource',
             profileStatuses: $resource('/api/profileStatus/:profileEmailForStatus', {
                 profileEmailForStatus: '@profileEmailForStatus'
             }),
-            getFriends: $resource('/api/profile/getFriendsForProfile/:limit',{
+            getFriends: $resource('/api/profile/getFriendsForProfile/:profileEmail/:limit',{
+                profileEmail: '@profileEmail',
                 limit: '@limit'
             })
         };

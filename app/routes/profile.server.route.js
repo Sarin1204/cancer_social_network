@@ -17,7 +17,7 @@ module.exports = function(app){
     app.route('/api/profileCheckRelationship/:profileEmailForRelationship')
         .get(profile.profileCheckFriend, profile.profileCheckPendingFriendRequestReceived, profile.profileCheckPendingFriendRequestSent);
 
-    app.route('/api/profile/getFriendsForProfile/:limit')
+    app.route('/api/profile/getFriendsForProfile/:profileEmail/:limit')
         .get(findFriend.getFollowed, profile.makeFriendGrid);
 
     app.param('profileEmail',profile.ProfileByEmail);

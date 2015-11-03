@@ -5,7 +5,15 @@
 var models = require('express-cassandra');
 
 exports.getFollowed = function(req, res, next){
-    var email = req.user.email;
+
+    if( req.profile.email != undefined){
+        var email = req.profile.email;
+    }
+    else{
+        var email = req.user.email;
+    }
+
+
 
     var query = {
         followed_email: email
@@ -32,3 +40,4 @@ exports.getFollowed = function(req, res, next){
         }
     });
 };
+

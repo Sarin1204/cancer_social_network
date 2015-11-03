@@ -64,24 +64,30 @@
                             <div class="col-md-3">
                             </div>
                             <div ng-controller="friendStatusController" class="col-md-3">
-                                <div ng-show="showMessage" class="{{friendActionResult.type}} fadein fadeout">{{friendActionResult.msg}}</div>
+                                <div style="min-height:40px" class="row">
+                                    <div ng-show="showMessage" style="padding:5px; margin: 5px;" class="{{friendActionResult.type}} fadein fadeout">{{friendActionResult.msg}}</div>
+                                </div>
+                                <div class="row">
                                 <div ng-show="RelationshipStatus == 'friend'">
                                     <!--<h3 style="margin-top:50%; margin-bottom:0">
                                     <span class="label label-primary">
                                         <i class="fa fa-check"></i> Friends
                                     </span>
                                     </h3>-->
-                                    <button uib-popover-template="dynamicPopover.templateUrl" popover-trigger="click" popover-placement="bottom"type="button" class="btn btn-primary">
+                                    <button style="margin-top:30%" uib-popover-template="friendButton.templateUrl" popover-trigger="click" popover-placement="bottom"type="button" class="btn btn-primary">
                                         <i class="fa fa-check"></i> Friends  <i class="fa fa-caret-down"></i>
                                     </button>
                                 </div>
                                 <div ng-show="RelationshipStatus == 'none'">
-                                    <button style="margin-top:50%; margin-bottom:0" type="addFriend" class="btn btn-primary" ng-click="addFriend()">
+                                    <button style="margin-top:30%; margin-bottom:0" type="addFriend" class="btn btn-primary" ng-click="addFriend()">
                                         <i class="fa fa-user-plus"></i> Add Friend
                                     </button>
                                 </div>
                                 <div ng-show="RelationshipStatus == 'pendingFriendRequestReceived'">
-                                    <div class="panel-card panel panel-default">
+                                    <button style="margin-top:30%" uib-popover-template="pendingFriendRequestReceived.templateUrl" popover-trigger="click" popover-placement="bottom"type="button" class="btn btn-primary">
+                                        <i class="fa fa-user-plus"></i> Pending Friend Request  <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <!--<div class="panel-card panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">Pending Friend Request</h4>
                                         </div>
@@ -99,10 +105,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div ng-show="RelationshipStatus == 'pendingFriendRequestSent'">
-                                    <div class="panel-card panel panel-default">
+                                    <!--<div class="panel-card panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">Friend Request Sent</h4>
                                         </div>
@@ -111,8 +117,12 @@
                                                 <i class="fa fa-user-times"></i> Delete
                                             </button>
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    <button style="margin-top:30%; margin-bottom:0" uib-popover-template="pendingFriendRequestSent.templateUrl" popover-trigger="click" popover-placement="bottom" type="button" class="btn btn-primary">
+                                        <i class="fa fa-user-plus"></i> Friend Request Sent  <i class="fa fa-caret-down"></i>
+                                    </button>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -227,6 +237,40 @@
 </script>
 </div>
 
-<script type="text/ng-template" id="myPopoverTemplate.html">
+<script type="text/ng-template" id="friend.html">
     <button class="btn btn-danger" ng-click="deleteFriendship()"><i class="fa fa-user-times"></i> Delete </button>
+</script>
+<script type="text/ng-template" id="friendRequestSent.html">
+    <div class="panel-card panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Friend Request Sent</h4>
+        </div>
+        <div class="panel-body">
+            <button class="btn btn-danger" ng-click='deleteFriendRequest()'>
+                <i class="fa fa-user-times"></i> Delete
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="friendRequestReceived.html">
+    <div class="panel-card panel panel-default form-group">
+        <div class="panel-heading">
+            <h4 class="panel-title">Pending Friend Request</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success" ng-click='confirmFriend()'>
+                        <i class="fa fa-user-plus"></i>Confirm
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger" ng-click='deleteFriendRequest()'>
+                        <i class="fa fa-user-times"></i> Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
