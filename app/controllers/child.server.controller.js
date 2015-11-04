@@ -22,7 +22,7 @@ var models = require('express-cassandra'),
 exports.signup = function(req, res, next) {
     var child = new models.instance.child(req.body);
     var parent = req.user;
-    console.log('parent is'+JSON.stringify(parent))
+    console.log('parent is'+JSON.stringify(parent));
     child.id = uuid.v1();
     var queries = [
         {
@@ -49,3 +49,28 @@ exports.signup = function(req, res, next) {
         });
     });
 };
+
+exports.childProfileByEmail = function(req, res, next){
+    console.log('parent_email is '+req.params.parentEmail);
+    parentEmail = req.params.parentEmail;
+    models.instance.child.findOne({parent_email : parentEmail},{raw: true}, function(err, child){
+        if(err){
+            console.log('Inside child server '+err);
+            return res.json('{"status": "error"}');
+        }
+        else if(child == undefined){
+            console.log('Inside child server undefined '+err);
+            return res.json({"status": "no_child"});
+        }
+        else{
+            console.log('Inside child server found '+child);
+            req.child = child;
+            next();
+        }
+    })
+};
+
+exports.returnChild = function(req, res){
+    return res.json(req.child);
+};
+

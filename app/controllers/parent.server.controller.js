@@ -81,3 +81,45 @@ exports.signout = function(req, res) {
     req.logout();
     res.redirect('/');
 };
+
+exports.updateParent = function(req, res, next) {
+        var parent = new models.instance.parents(req.body);
+        console.log('Person is '+JSON.stringify(parent));
+        parent.provider = 'local';
+        if('password' in parent){
+            bcrypt.genSalt(10, function(err,salt){
+                bcrypt.hash(parent.password, salt, function(err, hash){
+                    parent.password = hash;
+                    parent.save(function(err){
+                        if(err) {
+                            console.log('Error message in updateParent' + err);
+                            return res.redirect('/');
+                        }
+                        req.login(parent, function(err){
+                            if (err) return next(err);
+                            else{
+                                return res.json({"status":"pass"})
+                            }
+
+                        });
+                    });
+                });
+            });
+        }
+        else{
+            parent.save(function(err){
+                if(err) {
+                    console.log('Error message in updateParent' + err);
+                    return res.redirect('/');
+                }
+                req.login(parent, function(err){
+                    if (err) return next(err);
+                    else{
+                        return res.json({"status":"pass"})
+                    }
+
+                });
+            });
+        }
+};
+

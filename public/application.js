@@ -3,7 +3,7 @@
  */
 var mainApplicationModuleName = 'cancer_network';
 var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','ngTagsInput','ngAnimate','ui.bootstrap','xeditable',
-    'auth','users','home','signupParent','profilePhoto','showFriendRequests','friendStatus','signupChild','signinParent','postStatus','dashboard','profile','profileSettings']);
+    'auth','users','home','signupParent','profilePhoto','showFriendRequests','friendStatus','signupChild','signinParent','postStatus','search','dashboard','profile','profileSettings']);
 
 mainApplicationModule.config(['$locationProvider','$httpProvider',
     function($locationProvider,$httpProvider){

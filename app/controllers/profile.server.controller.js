@@ -24,24 +24,6 @@ exports.ProfileByEmail = function(req,res, next, profileEmail){
 
 };
 
-exports.childProfileByEmail = function(req, res, next, parentEmail){
-
-    models.instance.child.findOne({parent_email : parentEmail},{raw: true}, function(err, child){
-        if(err){
-            console.log('Inside child server '+err);
-            return res.json('{"status": "error"}');
-        }
-        else if(child == undefined){
-            console.log('Inside child server undefined '+err);
-            return res.json({"status": "no_child"});
-        }
-        else{
-            console.log('Inside child server found '+child);
-            req.child = child;
-            next();
-        }
-    })
-};
 
 exports.getStatuses = function(req, res){
     console.log('profileEmailForStatus' + JSON.stringify(req.params));

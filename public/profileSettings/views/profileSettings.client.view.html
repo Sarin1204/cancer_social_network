@@ -1,18 +1,29 @@
 <nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="top-navbar-1">
-            <ul class="nav navbar-nav navbar-right"  ng-controller="profilePhotoController">
-                <li style="padding-right:1em">
+        <div class="row">
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=" col-md-10 navbar-collapse" id="top-navbar-1" style="width:83.3%">
+                <ul class="nav navbar-nav" ng-controller="profilePhotoController" style="float:none">
+                    <li class="col-md-6" style="padding-bottom:0">
+                        <form ng-controller="searchController" class="" role="search">
+                            <div>
+                                <input type="text" ng-model="customSelected" typeahead-template-url="customTemplate.html" typeahead-append-to-body="true"  placeholder="Search..."
+                                       uib-typeahead="parent as parent.tag for parent in getParents($viewValue)" typeahead-loading="loadingParents" typeahead-no-results="noResults"
+                                       typeahead-min-length="2" class="form-control">
+                                <i id="filtersubmit" class="fa fa-search "></i>
+                            </div>
+                        </form>
+                    </li>
+                    <li style="padding-right:1em">
 							<span class="li-text">
 								Connect with us
 							</span>
@@ -21,35 +32,33 @@
 								<a href="https://twitter.com/ccngold"><i class="fa fa-twitter"></i></a>
 								<a href="http://www.youtube.com/channel/UCzIYUSSziLAfnN19wSzYqGw"><i class="fa fa-youtube"></i></a>
 							</span>
-                </li>
-                <li class="profile">
-                    <a href="#!/profile/{{profileHref}}">
-                        <img style="height:40px" class="img-circle" src="{{profile_photo}}">
-                    </a>
-                </li>
-                <li style="padding:17px">
-                    <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
-                </li>
-                <li style="padding:17px">
-                    <a href="#!/dashboard">Home</a>
-                </li>
-                <li ng-controller="ModalDemoCtrl" style="padding:17px; cursor: pointer;">
-                    <i class="fa fa-users" ng-click="open()"></i>
-                </li>
-                <li style="padding:17px">
-                    <a href="#!/profileSettings/">
-                        <i class="fa fa-cog"></i>
-                    </a>
-                </li>
-                <li style="padding-left:1em">
-                    <span class="li-text">
-                        Logout
-                    </span>
+                    </li>
+                    <li class="profile">
+                        <a href="#!/profile/{{profileHref}}">
+                            <img style="height:40px" class="img-circle" src="{{profile_photo}}">
+                        </a>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/dashboard">Home</a>
+                    </li>
+                    <li class="navbar-li" ng-controller="ModalDemoCtrl" style="cursor: pointer;">
+                        <i class="fa fa-users" ng-click="open()"></i>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/profileSettings/">
+                            <i class="fa fa-cog"></i>
+                        </a>
+                    </li>
+                    <li style="padding-left:1em">
                     <span class="li-social">
                         <a href="/signout"><i class="fa fa-sign-out"></i></a>
                     </span>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
@@ -78,7 +87,7 @@
                                                 <span class="title">Email: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.email" e-name="email" e-required>{{ parent.name || 'empty' }}</span>
+                                                <span editable-text="parent.email" e-name="email" e-required>{{ parent.email || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -88,7 +97,7 @@
                                                 <span class="title">Password: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.password" e-name="password" e-required>{{ parent.password || 'empty' }}</span>
+                                                <span editable-text="parent.password" e-name="password"> xxxxxxx </span>
                                             </div>
                                         </div>
                                     </li>
@@ -128,7 +137,7 @@
                                                 <span class="title">Phone: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.phone" e-name="phone" e-required>{{ parent.phone || 'empty' }}</span>
+                                                <span editable-tel="parent.phone" e-pattern='(\d{10})' e-name="phone" e-title="xxxxxxxxxx">{{ parent.phone || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -138,7 +147,7 @@
                                                 <span class="title">Address: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.address" e-name="address" e-required>{{ parent.address || 'empty' }}</span>
+                                                <span editable-text="parent.address" e-name="address">{{ parent.address || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -148,7 +157,7 @@
                                                 <span class="title">Zipcode: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.zipcode" e-name="zipcode" e-required>{{ parent.zipcode || 'empty' }}</span>
+                                                <span editable-number="parent.zipcode" e-name="zipcode" e-min="10000">{{ parent.zipcode || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -195,6 +204,7 @@
                         </div>
                         <div class="panel-body">
                             <form editable-form name="editableChildForm" onaftersave="saveChild()" role="form"  class="registration-form">
+                                <ul class="list-group">
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -231,7 +241,7 @@
                                                 <span class="title">Age: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="child.age" e-name="age" e-required>{{ child.age || 'empty' }}</span>
+                                                <span editable-number="child.age" e-name="age" e-required>{{ child.age || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -261,7 +271,7 @@
                                             <span class="title">Hospital: </span>
                                         </div>
                                         <div class="col-md-6">
-                                            <span editable-text="child.hospital" e-name="hospital" e-required>{{ child.hospital || 'empty' }}</span>
+                                            <span editable-text="child.hospital" e-name="hospital">{{ child.hospital || 'empty' }}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -271,7 +281,7 @@
                                                 <span class="title">Zipcode: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="child.zipcode" e-name="zipcode" e-required>{{ child.zipcode || 'empty' }}</span>
+                                                <span editable-number="child.zipcode" e-name="zipcode" e-required e-min="10000">{{ child.zipcode || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -374,4 +384,18 @@
             </div>
         </div>
     </div>
+</script>
+
+<script type="text/ng-template" id="customTemplate.html">
+    <li  class="col-md-12" style="width:535px" >
+        <a href="#!/profile/{{match.model.tag}}" style="color:black;">
+            <div class="col-md-2">
+                <img ng-src="{{match.model.profile_photo}}" style="width:50px; height:50px">
+            </div>
+            <div class="col-md-10"  style="padding-top:10px; padding-left:0">
+                <span>{{match.model.firstname}}</span>
+                <span>{{match.model.lastname}}</span>
+            </div>
+        </a>
+    </li>
 </script>
