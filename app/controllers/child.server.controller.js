@@ -56,11 +56,11 @@ exports.childProfileByEmail = function(req, res, next){
     models.instance.child.findOne({parent_email : parentEmail},{raw: true}, function(err, child){
         if(err){
             console.log('Inside child server '+err);
-            return res.json('{"status": "error"}');
+            return res.status(500).send({ error: 'childProfileByEmail returned error'+err });
         }
         else if(child == undefined){
             console.log('Inside child server undefined '+err);
-            return res.json({"status": "no_child"});
+            return res.status(500).send({ error: 'childProfileByEmail returned error'+err });
         }
         else{
             console.log('Inside child server found '+child);
@@ -69,6 +69,26 @@ exports.childProfileByEmail = function(req, res, next){
         }
     })
 };
+
+exports.childProfileByEmailLimited = function(req, res, next){
+    parentEmail = req.params.parentEmail;
+    models.instance.child.findOne({parent_email : parentEmail},{raw: true, select: ['cancer_type','interests','age']}, function(err, child){
+        if(err){
+            console.log('Inside childProfileByEmailLimited server error '+err);
+            return res.status(500).send({ error: 'childProfileByEmailLimited returned error'+err });
+        }
+        else if(child == undefined){
+            console.log('Inside childProfileByEmailLimited server undefined '+err);
+            return res.status(500).send({ error: 'childProfileByEmailLimited returned error'+err });
+        }
+        else{
+            console.log('Inside childProfileByEmailLimited server found '+child);
+            req.child = child;
+            next();
+        }
+    })
+};
+
 
 exports.returnChild = function(req, res){
     return res.json(req.child);

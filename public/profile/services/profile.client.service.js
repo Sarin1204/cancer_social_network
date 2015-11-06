@@ -14,6 +14,12 @@ angular.module('profile').factory('Profile', ['$resource',
             currentChild: $resource('api/profileChild/:parentEmail', {
                 parentEmail: '@parentEmail'
                 }),
+            currentProfileLimited: $resource('api/profileLimited/:profileEmail', {
+                profileEmail: '@profileEmail'
+            }),
+            currentChildLimited: $resource('api/profileChildLimited/:parentEmail', {
+                parentEmail: '@parentEmail'
+            }),
             profileStatuses: $resource('/api/profileStatus/:profileEmailForStatus', {
                 profileEmailForStatus: '@profileEmailForStatus'
             }),

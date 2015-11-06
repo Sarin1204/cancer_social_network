@@ -4,7 +4,8 @@
 
 var models = require('express-cassandra');
 
-exports.ProfileByEmail = function(req,res, next, profileEmail){
+exports.ProfileByEmail = function(req,res, next){
+    profileEmail = req.params.profileEmail;
 
     models.instance.parents.findOne({email:profileEmail},{raw: true}, function(err, parent){
         if(err){
@@ -13,10 +14,30 @@ exports.ProfileByEmail = function(req,res, next, profileEmail){
         }
         else if(parent == undefined){
             console.log('Inside parent server undefined '+err);
-            return res.json({"status": "no_child"});
+            return res.status(500).send({ error: 'ProfileByEmail returned error'+err });
         }
         else{
             console.log('Inside parent server found '+parent);
+            req.profile = parent;
+            next();
+        }
+    })
+
+};
+
+exports.ProfileByEmailLimited = function(req,res,next){
+    profileEmail = req.params.profileEmail;
+    models.instance.parents.findOne({email:profileEmail},{raw: true, select:['email','firstname','lastname','profile_photo','address']}, function(err, parent){
+        if(err){
+            console.log('Inside ProfileByEmailLimited server error '+err);
+            return res.status(500).send({ error: 'ProfileByEmail returned error'+err });
+        }
+        else if(parent == undefined){
+            console.log('Inside ProfileByEmailLimited server undefined '+err);
+            return res.status(500).send({ error: 'ProfileByEmail returned error'+err });
+        }
+        else{
+            console.log('Inside ProfileByEmailLimited server found '+parent);
             req.profile = parent;
             next();
         }

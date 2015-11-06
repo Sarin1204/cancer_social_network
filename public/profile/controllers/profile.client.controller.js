@@ -8,6 +8,7 @@ angular.module('profile').controller('ProfileController',['$scope',
         $scope.errorMsg = "";
         $scope.Status = Status;
         $scope.statusPostedVar = Status.statusPostedVar;
+        $scope.friendStatus = {};
 
         $scope.$watch('Status.statusPostedVar', function(newVal, oldVal, scope){
            if(newVal){
@@ -23,6 +24,49 @@ angular.module('profile').controller('ProfileController',['$scope',
                    Status.statusPostedVar = false;
                });
            }
+        });
+
+        $scope.$on('getRelationship', function(event, data) {
+            if(data == 'self' || data == 'friend'){
+                Profile.currentProfile.get({ profileEmail: $routeParams.profileHref }, function(response){
+                    $scope.currentProfile = response;
+                }, function(error){
+                    console.log('error msg in currentProfile');
+                    $scope.errorMsg = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+                });
+                Profile.currentChild.get({ parentEmail: $routeParams.profileHref }, function(response){
+                    $scope.currentChild = response;
+                }, function(error){
+                    console.log('error msg in currentChild');
+                    $scope.errorMsg = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+                });
+                Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
+                    $scope.profileStatusList = response;
+                    /*console.log('profile Status List ' + JSON.stringify(response))*/
+
+                }, function(error){
+                    console.log('Inside error');
+                    $scope.errorMsg = 'Oops! Something unexpected occured!'
+                });
+
+            }
+            else{
+                Profile.currentProfileLimited.get({ profileEmail: $routeParams.profileHref }, function(response){
+                    console.log('currentProfileLimited response is'+JSON.stringify(response));
+                    $scope.currentProfile = response;
+                }, function(error){
+                    console.log('error msg in currentProfile'+JSON.stringify(error));
+                    $scope.errorMsg = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+                });
+                Profile.currentChildLimited.get({ parentEmail: $routeParams.profileHref }, function(response){
+                    console.log('currentChildLimited response is'+JSON.stringify(response));
+                    $scope.currentChild = response;
+                }, function(error){
+                    console.log('error msg in currentChild');
+                    $scope.errorMsg = {type:"alert alert-danger", msg: "'Oops! Something unexpected occured!"}
+                });
+
+            }
         });
 
         Profile.getFriends.query({profileEmail: $routeParams.profileHref, limit: 6},function(response){
@@ -60,7 +104,7 @@ angular.module('profile').controller('ProfileController',['$scope',
                 $scope.currentProfile = result;
             });*/
 
-        function currentProfile() {
+        /*function currentProfile() {
             var d = $q.defer();
             var result = Profile.currentProfile.get({ profileEmail: $routeParams.profileHref }, function() {
                 d.resolve(result);
@@ -87,17 +131,10 @@ angular.module('profile').controller('ProfileController',['$scope',
             $scope.currentProfile = currentProfile;
             $scope.currentChild = currentChild;
             //TODO: something...
-        });
-
-       Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
-           $scope.profileStatusList = response;
-           /*console.log('profile Status List ' + JSON.stringify(response))*/
-
-        }, function(error){
-           console.log('Inside error');
-           $scope.errorMsg = 'Oops! Something unexpected occured!'
-       });
+        });*/
     }
+
+
 ]);
 
 /*angular.module('profile').directive('ngPullDown', function() {

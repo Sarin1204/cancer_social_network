@@ -13,16 +13,24 @@ angular.module('friendStatus').controller('friendStatusController',['$scope','$r
         $scope.isFriend = "someValue";
         $scope.showMessage = false;
 
+        var parentScope = $scope.$parent;
+        parentScope.friendStatus = $scope;
+
         console.log("isFriend == "+$scope.isFriend);
-        if($scope.currentProfileEmail != $window.user.email){
+        if($scope.currentProfileEmail == Authentication.user.email)
+        {
+            $scope.RelationshipStatus = 'self';
+            $scope.$emit('getRelationship', $scope.RelationshipStatus);
+        }
+        else{
             FriendStatus.getRelationship.get({profileEmailForRelationship: $routeParams.profileHref}, function(response){
                 console.log('Relations is '+JSON.stringify(response));
                 $scope.RelationshipStatus = response.relationship;
+                $scope.$emit('getRelationship', $scope.RelationshipStatus);
             }, function(error){
-                console.log('Inside error for getFriend');
+                console.log('Inside error for getRelationship');
                 $scope.errorMsg = 'Oops! Something unexpected occured!'
             });
-
         }
 
         $scope.addFriend = function(){

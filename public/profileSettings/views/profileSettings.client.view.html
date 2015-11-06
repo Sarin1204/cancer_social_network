@@ -19,7 +19,7 @@
                                 <input type="text" ng-model="customSelected" typeahead-template-url="customTemplate.html" typeahead-append-to-body="true"  placeholder="Search..."
                                        uib-typeahead="parent as parent.tag for parent in getParents($viewValue)" typeahead-loading="loadingParents" typeahead-no-results="noResults"
                                        typeahead-min-length="2" class="form-control">
-                                <i id="filtersubmit" class="fa fa-search "></i>
+                                <a href="#!/profile/{{customSelected.tag}}"><i id="filtersubmit" class="fa fa-search "></i></a>
                             </div>
                         </form>
                     </li>

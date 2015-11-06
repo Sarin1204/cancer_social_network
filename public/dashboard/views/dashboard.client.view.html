@@ -19,7 +19,7 @@
                             <input type="text" ng-model="customSelected" typeahead-append-to-body="true" typeahead-template-url="customTemplate.html" placeholder="Search..."
                                    uib-typeahead="parent as parent.tag for parent in getParents($viewValue)" typeahead-loading="loadingParents" typeahead-no-results="noResults"
                                    typeahead-min-length="2" class="form-control">
-                            <i id="filtersubmit" class="fa fa-search "></i>
+                            <a href="#!/profile/{{customSelected.tag}}"><i id="filtersubmit" class="fa fa-search "></i></a>
                         </div>
                     </form>
                 </li>
@@ -90,7 +90,7 @@
                         <div class="panel-card panel panel-default" data-ng-repeat="status in statuses">
                             <div class="panel-heading container-fluid">
                                 <div class="row">
-                                    <div class="col-md-2 nopadding"><img style="height:40px" class="img-thumbnail" src="{{status.profile_photo}}"></div>
+                                    <div class="col-md-2 nopadding"><img style="height:40px" class="img-thumbnail" ng-src="{{status.profile_photo}}"></div>
                                     <div class="col-md-3 nopadding">
                                         <div class="row">
                                             <p class="status_info">{{status.status_update_firstname}} {{status.status_update_lastname}}</p>
@@ -120,7 +120,7 @@
                                 <div data-ng-repeat="friend in friends" class="panel-card panel panel-default">
                                     <div class="panel-body container-fluid">
                                         <div class="row">
-                                            <div class="col-md-4"><img style="width: 80px; height:80px" class="img-thumbnail" src="{{friend.parent_profile_photo}}"></div>
+                                            <div class="col-md-4"><img style="width: 80px; height:80px" class="img-thumbnail" ng-src="{{friend.parent_profile_photo}}"></div>
                                             <div class="col-md-6">
                                             <div class="row">
                                                 <a href="#!/profile/{{friend.parent_email}}"><p style="margin-top:8px">{{friend.parent_firstname}} {{friend.parent_lastname}}</p></a>
