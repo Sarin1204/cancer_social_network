@@ -8,12 +8,54 @@ var models = require('express-cassandra'),
 exports.signup = function(req, res, next) {
     if (!req.user) {
         var parent = new models.instance.parents(req.body);
+        var email = req.body.email,
+            password = req.body.password,
+            firstname = req.body.firstname,
+            lastname = req.body.lastname,
+            gender = req.body.gender,
+            address = req.body.address,
+            zipcode = parseInt(req.body.zipcode),
+            phone = parseInt(req.body.phone),
+            prefix = email.substr(0,2),
+            remaining = email.substr(2, email.length);
+
+        if (gender == 'female'){
+            var profile_photo = "/img/empty_dp_female.png"
+        }
+        else
+            var profile_photo = "/img/empty_dp_male.jpg"
         console.log('Person is '+JSON.stringify(parent));
         parent.provider = 'local';
         bcrypt.genSalt(10, function(err,salt){
             bcrypt.hash(parent.password, salt, function(err, hash){
                 parent.password = hash;
-                parent.save(function(err){
+                var queries = [
+                    {
+                        query: 'insert into parents (email, password, firstname, lastname, gender, phone, profile_photo) values (?, ?, ?, ?, ?, ?, ?)',
+                        params: [email, hash, firstname, lastname, gender, phone, profile_photo]
+
+                    },
+                    {
+                        query: 'insert into parent_hash_tags (prefix, remaining, firstname, lastname, profile_photo, tag) values (?, ?, ?, ?, ?, ?)',
+                        params: [prefix, remaining, firstname, lastname, profile_photo, email]
+                    }
+                ];
+                models.instance.parents.get_cql_client(function(err, client){
+                    client.batch(queries, { prepare: true }, function(err) {
+                        if(err) {
+                            console.log('Error message in signupParent' + err);
+                            return res.redirect('/');
+                        }
+                        else{
+                            console.log('Batch query to save parent successful');
+                            req.login(parent, function(err){
+                                if (err) return next(err);
+                                return res.redirect('/');
+                            });
+                        }
+                    });
+                });
+               /* parent.save(function(err){
                     if(err) {
                         console.log('Error message in signupParent' + err);
                         return res.redirect('/');
@@ -22,7 +64,7 @@ exports.signup = function(req, res, next) {
                         if (err) return next(err);
                         return res.redirect('/');
                     });
-                });
+                });*/
             });
         });
 

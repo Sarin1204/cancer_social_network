@@ -147,17 +147,17 @@
                                                 <span class="title">Address: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-text="parent.address" e-name="address">{{ parent.address || 'empty' }}</span>
+                                                <span editable-text="child.address" e-name="address">{{ child.address || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <span class="title">Zipcode: </span>
+                                                <span class="title">Location: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-number="parent.zipcode" e-name="zipcode" e-min="10000">{{ parent.zipcode || 'empty' }}</span>
+                                                <span editable-number="child.location" e-name="location" e-min="10000">{{ child.location || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -278,10 +278,10 @@
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <span class="title">Zipcode: </span>
+                                                <span class="title">School: </span>
                                             </div>
                                             <div class="col-md-6">
-                                                <span editable-number="child.zipcode" e-name="zipcode" e-required e-min="10000">{{ child.zipcode || 'empty' }}</span>
+                                                <span editable-text="child.school" e-name="school">{{ child.school || 'empty' }}</span>
                                             </div>
                                         </div>
                                     </li>

@@ -1,0 +1,201 @@
+<nav class="navbar navbar-css navbar-inverse" role="navigation" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://www.childrenscancernetwork.org/"><img src="/img/logo.png" style="height:66px"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=" col-md-10 navbar-collapse" id="top-navbar-1" style="width:83.3%">
+                <ul class="nav navbar-nav" ng-controller="profilePhotoController" style="float:none">
+                    <li class="col-md-6">
+                        <form ng-controller="searchController" class="" role="search">
+                            <div>
+                                <input type="text" ng-model="customSelected" typeahead-append-to-body="true" typeahead-template-url="customTemplate.html" placeholder="Search..."
+                                       uib-typeahead="parent as parent.tag for parent in getParents($viewValue)" typeahead-loading="loadingParents" typeahead-no-results="noResults"
+                                       typeahead-min-length="2" class="form-control">
+                                <a href="#!/profile/{{customSelected.tag}}"><i id="filtersubmit" class="fa fa-search "></i></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li style="padding-right:1em">
+							<span class="li-text">
+								Connect with us
+							</span>
+							<span class="li-social">
+								<a href="https://www.facebook.com/pages/Childrens-Cancer-Network/128082398431"><i class="fa fa-facebook"></i></a>
+								<a href="https://twitter.com/ccngold"><i class="fa fa-twitter"></i></a>
+								<a href="http://www.youtube.com/channel/UCzIYUSSziLAfnN19wSzYqGw"><i class="fa fa-youtube"></i></a>
+							</span>
+                    </li>
+                    <li class="profile">
+                        <a href="#!/profile/{{profileHref}}">
+                            <img style="height:40px" class="img-circle" src="{{profile_photo}}">
+                        </a>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/profile/{{profileHref}}">{{firstName}}</a>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/dashboard">Home</a>
+                    </li>
+                    <li class="navbar-li" ng-controller="ModalDemoCtrl" style="cursor: pointer;">
+                        <i class="fa fa-users" ng-click="open()"></i>
+                    </li>
+                    <li class="navbar-li">
+                        <a href="#!/profileSettings/">
+                            <i class="fa fa-cog"></i>
+                        </a>
+                    </li>
+                    <li style="padding-left:1em">
+                    <span class="li-social">
+                        <a href="/signout"><i class="fa fa-sign-out"></i></a>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row" ng-controller="connectController">
+                <div class="col-md-3">
+                    <div class="panel-card panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Search
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" data-ng-submit="submit_filter()" class="registration-form">
+                                <div class="panel-card panel">
+                                    <div class="panel-heading">
+                                        <span style="font-weight: bold">Cancer Type</span>
+                                    </div>
+                                    <div class="panel-body" style="padding-top:0">
+                                        <div data-ng-repeat="(item,enabled) in cancer_types">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input id="cancer_type" type="checkbox" ng-model=cancer_types[item] name="{{item}}">{{item}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div ng-show="showCancerTypeAdd" class="fadein fadeout">
+                                            <button type="button" ng-click="showCancerTypeAddClicked()" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add </button>
+                                        </div>
+                                        <div ng-show="showCancerTypeAhead" class="fadein fadeout" ng-controller="cancerTypeController">
+                                            <input type="text" ng-model="asyncSelected" typeahead-append-to-body="true" placeholder="Search..." uib-typeahead="cancer for cancer in getCancerType($viewValue) | limitTo:8"  typeahead-on-select="onSelectCancerType($item, $model, $label); asyncSelected='';" typeahead-min-length="2" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="panel-card panel">
+                                    <div class="panel-heading">
+                                        <span style="font-weight: bold"> Location </span>
+                                    </div>
+                                    <div class="panel-body" style="padding-top:0">
+                                        <div data-ng-repeat="(item,enabled) in locations">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input id="location" type="checkbox" ng-model="locations[item]" value="{{item}}">{{item}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div ng-show="showLocationAdd" class="fadein fadeout">
+                                            <button type="button" ng-click="showLocationAddClicked()" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add </button>
+                                        </div>
+                                        <div ng-show="showLocationTypeAhead" class="fadein fadeout" ng-controller="interestsController">
+                                            <input type="text" data-ng-model="address" id="address" typeahead-wait-ms="300" placeholder="Start typing to load locations..."
+                                                   uib-typeahead="location for location in getLocation($viewValue)" typeahead-on-select="onSelectLocation($item, $model, $label); asyncSelected='';"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="panel-card panel">
+                                    <div class="panel-heading">
+                                        <span style="font-weight: bold">Interests</span>
+                                    </div>
+                                    <div class="panel-body" style="padding-top:0">
+                                        <div data-ng-repeat="(item,enabled) in interests">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input id="interest" type="checkbox" ng-model="interests[item]" value="{{item}}">{{item}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div ng-show="showInterestsAdd" class="fadein fadeout">
+                                            <button type="button" ng-click="showInterestsAddClicked()" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add </button>
+                                        </div>
+                                        <div ng-show="showInterestsTypeAhead" class="fadein fadeout" ng-controller="interestsController">
+                                            <input type="text" ng-model="asyncSelected" typeahead-append-to-body="true" placeholder="Search..." uib-typeahead="interest for interest in getInterests($viewValue) | limitTo:8"  typeahead-on-select="onSelectInterests($item, $model, $label); asyncSelected='';" typeahead-min-length="2" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="panel-card panel">
+                                    <div class="panel-body" style="padding-top:0">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="panel-card panel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{titleMsg}}</h3>
+        </div>
+        <div class="modal-body">
+            <div data-ng-repeat="friend in friendRequests" class="panel-card panel panel-default" style="margin-bottom:0">
+                <div class="panel-body container-fluid" style="padding:0">
+                    <div class="row">
+                        <div class="col-md-2"><img style="width: 80px; height:80px" class="img-thumbnail" src="{{friend.sender_profile_photo}}"></div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <a href="#!/profile/{{friend.parent_sent_email}}" ng-click="ok()"><p style="margin-top:8px">{{friend.sender_firstname}} {{friend.sender_lastname}}</p></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+<script type="text/ng-template" id="customTemplate.html">
+    <li  class="col-md-12" style="width:535px" >
+        <a href="#!/profile/{{match.model.tag}}" style="color:black; z-index:1000">
+            <div class="col-md-2">
+                <img ng-src="{{match.model.profile_photo}}" style="width:50px; height:50px">
+            </div>
+            <div class="col-md-10"  style="padding-top:10px; padding-left:0">
+                <span>{{match.model.firstname}}</span>
+                <span>{{match.model.lastname}}</span>
+            </div>
+        </a>
+    </li>
+</script>

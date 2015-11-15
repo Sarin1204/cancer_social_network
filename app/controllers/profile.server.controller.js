@@ -27,7 +27,7 @@ exports.ProfileByEmail = function(req,res, next){
 
 exports.ProfileByEmailLimited = function(req,res,next){
     profileEmail = req.params.profileEmail;
-    models.instance.parents.findOne({email:profileEmail},{raw: true, select:['email','firstname','lastname','profile_photo','address']}, function(err, parent){
+    models.instance.parents.findOne({email:profileEmail},{raw: true, select:['email','firstname','lastname','profile_photo']}, function(err, parent){
         if(err){
             console.log('Inside ProfileByEmailLimited server error '+err);
             return res.status(500).send({ error: 'ProfileByEmail returned error'+err });
@@ -63,7 +63,7 @@ exports.getStatuses = function(req, res){
         }
     })*/
 
-    var query = 'Select DATEOF("id"), "body" from parent_status_updates where email=?'
+    var query = 'Select email,id, DATEOF("id"), "body", comments from parent_status_updates where email=?'
     var params = [req.params.profileEmailForStatus];
     models.instance.parent_status_updates.execute_query(query, params, function(err, statuses){
         if(err){
@@ -76,7 +76,10 @@ exports.getStatuses = function(req, res){
         }
         else{
             for(var i=0;i<statuses.rows.length;i++){
-                statuses.rows[i]['date'] = statuses.rows[i]['DATEOF(id)'].toString().substr(0,15)
+                statuses.rows[i]['date'] = statuses.rows[i]['system.dateof(id)'].toString().substr(0,15);
+                /*To allow same postComment controller to be used from both profile and dashboard*/
+                statuses.rows[i]['status_update_id'] = statuses.rows[i]['id'];
+                statuses.rows[i]['status_update_email'] = statuses.rows[i]['email']
             }
             console.log('Inside getStatuses server found '+JSON.stringify(statuses.rows));
             res.json(statuses.rows);
@@ -88,7 +91,7 @@ exports.profileCheckFriend = function(req, res, next){
     query = {
         'follower_email' : req.user.email,
         'followed_email' : req.params.profileEmailForRelationship
-    }
+    };
     models.instance.parent_friends.findOne(query, {raw :true}, function(err, relationship){
         if(err){
             console.log('Inside findIfProfileFriend server '+err);

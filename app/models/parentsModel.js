@@ -9,8 +9,6 @@ module.exports = {
         "firstname" : {"type": "text"},
         "lastname" : {"type": "text"},
         "child_id" : {"type": "uuid"},
-        "address" : {"type": "text"},
-        "zipcode" : {"type": "int"},
         "phone" : {"type": "varint"},
         "facebook_id": {"type": "text"},
         "google_id": {"type": "text"},

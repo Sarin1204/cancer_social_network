@@ -6,7 +6,7 @@ var models = require('express-cassandra');
 
 exports.pendingFriendRequests = function(req, res){
     var parent_received_email = req.user.email;
-
+    console.log("parent received email is"+req.user.email);
     models.instance.pending_friend_requests.find({parent_received_email: parent_received_email},{raw: true, select:['parent_sent_email','sender_firstname','sender_lastname','sender_profile_photo']}, function(err, friendRequests){
         if(err) {
             console.log('Inside showFriendRequests server '+err);

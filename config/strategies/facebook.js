@@ -38,8 +38,26 @@ module.exports = function() {
                             console.log('Error message in signup '+err);
                             return res.redirect('/signup');
                         }
-                        return done(null, new_parent);
-                    })
+                        else{
+                            var prefix = parents_instance.email.substr(0,2),
+                                remaining = parents_instance.email.substr(2,parents_instance.email.length),
+                                firstname = parents_instance.firstname,
+                                lastname = parents_instance.lastname,
+                                profile_photo = parents_instance.profile_photo,
+                                tag = parents_instance.email;
+                            var query = 'insert into parent_hash_tags (prefix, remaining, firstname, lastname, profile_photo, tag) values (?, ?, ?, ?, ?, ?)',
+                                params = [prefix, remaining, firstname, lastname, tag, profile_photo];
+                            models.instance.parent_hash_tags.execute_query(query, params, function(err, people){
+                                if(err){
+                                    console.log('Error message in signup '+err);
+                                    return res.redirect('/signup');
+                                }
+                                else{
+                                    return done(null, new_parent);
+                                }
+                            });
+                        }
+                });
             })
         }));
 };

@@ -9,7 +9,7 @@ models.setDirectory("/home/sarin/Cancer_Network/app/models").bind(
     {
         clientOptions: {
             contactPoints: ['127.0.0.1'],
-            keyspace: 'cancer_network',
+            keyspace: 'cancer_social_network1',
             queryOptions: {consistency: models.consistencies.one}
         },
         ormOptions: {

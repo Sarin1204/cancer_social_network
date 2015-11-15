@@ -62,6 +62,10 @@ module.exports = function () {
     require('../app/routes/deleteFriend.server.route.js')(app);
     require('../app/routes/profileSettings.server.route.js')(app);
     require('../app/routes/search.server.route.js')(app);
+    require('../app/routes/postComment.server.route.js')(app);
+    require('../app/routes/cancerType.server.route.js')(app);
+    require('../app/routes/interests.server.route.js')(app);
+    require('../app/routes/connect.server.route.js')(app);
 
     app.use(express.static('./public'));
 

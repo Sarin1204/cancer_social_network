@@ -69,11 +69,12 @@
                                     <input type="text" data-ng-model="lastname" id="lastname" class="form-control" placeholder="lastname" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="cancer_type">Cancer_type</label>
-                                <div>
-                                    <input type="text" data-ng-model="cancer_type" id="cancer_type" class="form-control" placeholder="Cancer Type">
-                                </div>
+                            <div class="form-group" ng-controller="cancerTypeController">
+                                <div>Cancer type is {{cancer_type1}}</div>
+                                <label for="cancer_type1">Cancer Type</label>
+                                    <input type="text" id="cancer_type1" data-ng-model="cancer_type1" typeahead-append-to-body="true" placeholder="Search..."
+                                           uib-typeahead="cancer for cancer in getCancerType($viewValue) | limitTo:8"
+                                           typeahead-on-select="onSelectCancerType($item, $model, $label)" typeahead-min-length="2" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="age">Age</label>
@@ -100,9 +101,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="zipcode">Zipcode</label>
+                                <label for="gender">School</label>
                                 <div>
-                                    <input type="text" data-ng-model="zipcode" id="zipcode" class="form-control" placeholder="zipcode">
+                                    <input type="text" data-ng-model="school" id="school" class="form-control" placeholder="school">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Parent's Address</label>
+                                <div>
+                                    <input type="text" data-ng-model="address" id="address" typeahead-wait-ms="300" placeholder="Start typing to load addresses..." uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+                                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                                    <div ng-show="noResults">
+                                        <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-offset-5">

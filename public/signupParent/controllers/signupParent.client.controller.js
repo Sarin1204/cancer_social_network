@@ -14,8 +14,6 @@ angular.module('signupParent').controller('SignupParentController',['$scope',
                firstname: this.firstname,
                lastname: this.lastname,
                gender: this.gender,
-               address: this.address,
-               zipcode: parseInt(this.zipcode),
                phone: parseInt(this.phone)
            });
 

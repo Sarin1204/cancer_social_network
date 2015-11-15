@@ -149,14 +149,16 @@
                     <div class="panel-body">
                         <ul class="list-group">
                             <li class="list-card list-group-item" ng-if="currentProfile.email">Email id is {{currentProfile.email}}</li>
-                            <li class="list-card list-group-item" ng-if="currentProfile.address">Lives in {{currentProfile.address}}, Zipcode: {{currentProfile.zipcode}}</li>
+                            <li class="list-card list-group-item" ng-if="currentChild.address">Lives at {{currentChild.address}}</li>
+                            <li class="list-card list-group-item" ng-if="currentChild.location && !currentChild.address">Lives in {{currentChild.location}}</li>
                             <li class="list-card list-group-item" ng-if="currentProfile.gender">Gender: {{currentProfile.gender}}</li>
-                            <li class="list-card list-group-item" ng-if="currentProfile.gender">Their phone number is {{currentProfile.phone}}</li>
+                            <li class="list-card list-group-item" ng-if="currentProfile.phone">Their phone number is {{currentProfile.phone}}</li>
                         </ul>
                         <ul class="list-group">
                             <li class="list-card list-group-item" ng-if="currentChild.firstname">Has a child named {{currentChild.firstname}} {{currentChild.lastname}}</li>
                             <li class="list-card list-group-item" ng-if="currentChild.cancer_type">Has a child with {{currentChild.cancer_type}}</li>
                             <li class="list-card list-group-item" ng-if="currentChild.age">Their child is {{currentChild.age}} years old</li>
+                            <li class="list-card list-group-item" ng-if="currentChild.school">Their child is attending {{currentChild.school}}</li>
                             <li class="list-card list-group-item" ng-if="currentChild.hospital">Their primary health care center is {{currentChild.hospital}}</li>
                         </ul>
                         <ul class="list-group">
@@ -203,6 +205,41 @@
                     </div>
                     <div class="panel-body">
                         <div>{{status.body}}</div>
+                    </div>
+                    <div class="panel-card panel panel-default replycard" data-ng-repeat="comment in status.comments">
+                        <div class="panel-body container-fluid replycard" style="background-color:#f5f5f5">
+                            <div class="row">
+                                <div class="col-md-1 nopadding"><img style="height:40px" class="img-thumbnail" ng-src="{{comment.author_profile_photo}}"></div>
+                                <div class="col-md-10 nopadding" style="display:inline-block">
+                                    <a href="#!/profile/{{comment.author_email}}">
+                                        <p class="status_info comment">{{comment.author_firstname}} {{comment.author_lastname}}</p>
+                                    </a>
+                                    <p class="status_info comment">{{comment.comment_body}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-card panel panel-default replycard">
+                        <div class="panel-body container-fluid replycard" style="background-color:#f5f5f5">
+                            <div class="row">
+                                <div class="col-md-1 nopadding">
+                                    <img ng-controller="profilePhotoController" style="height:40px" class="img-thumbnail" ng-src="{{profile_photo}}">
+                                </div>
+                                <div class="col-md-10">
+                                    <form ng-controller="CommentController" role="form" data-ng-submit="post_comment()"  class="registration-form">
+                                        <div class="form-group">
+                                            <textarea name="message" cols="20" rows="8" data-ng-model="comment" id="comment" class="form-control message" style="height: 42px; overflow: hidden;" placeholder="Write a comment..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" name="submit" value="Post" class="btn btn-primary btn-sm" style="float:right">
+                                        </div>
+                                        <div class="form-group">
+                                            <div ng-show="showMessage" class="{{postCommentResult.type}} fadein fadeout">{{postCommentResult.msg}}</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

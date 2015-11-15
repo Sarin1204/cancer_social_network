@@ -2,20 +2,23 @@
  * Created by sarin on 10/30/15.
  */
 angular.module('profile').controller('ProfileController',['$scope',
-    '$routeParams','Profile','$q','$window','$timeout','Status', function($scope, $routeParams, Profile, $q, $window,$timeout,Status) {
+    '$routeParams','Profile','$q','$window','$timeout','Status','Comment', function($scope, $routeParams, Profile, $q, $window,$timeout,Status,Comment) {
 
         $scope.currentProfileEmail = $routeParams.profileHref;
         $scope.errorMsg = "";
         $scope.Status = Status;
         $scope.statusPostedVar = Status.statusPostedVar;
         $scope.friendStatus = {};
+        $scope.Comment = Comment;
+        $scope.commentPostedVar = Comment.commentPostedVar;
+
 
         $scope.$watch('Status.statusPostedVar', function(newVal, oldVal, scope){
            if(newVal){
                console.log('New Value in PostStatus');
                Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
                    $scope.profileStatusList = response;
-                   /*console.log('profile Status List ' + JSON.stringify(response))*/
+                   /*console.log('profile Status List ' + JSON.stringify(response));*/
                    Status.statusPostedVar = false;
 
                }, function(error){
@@ -24,6 +27,22 @@ angular.module('profile').controller('ProfileController',['$scope',
                    Status.statusPostedVar = false;
                });
            }
+        });
+
+        $scope.$watch('Comment.commentPostedVar', function(newVal, oldVal, scope){
+            if(newVal){
+                console.log('New Value in commentPosted');
+                Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
+                    $scope.profileStatusList = response;
+                    /*console.log('profile Status List ' + JSON.stringify(response));*/
+                    Status.commentPostedVar = false;
+
+                }, function(error){
+                    console.log('Inside error');
+                    $scope.errorMsg = 'Oops! Something unexpected occured!';
+                    Status.commentPostedVar = false;
+                });
+            }
         });
 
         $scope.$on('getRelationship', function(event, data) {
@@ -42,7 +61,7 @@ angular.module('profile').controller('ProfileController',['$scope',
                 });
                 Profile.profileStatuses.query({profileEmailForStatus: $routeParams.profileHref}, function(response){
                     $scope.profileStatusList = response;
-                    /*console.log('profile Status List ' + JSON.stringify(response))*/
+                    console.log('profile Status List ' + JSON.stringify(response))
 
                 }, function(error){
                     console.log('Inside error');
@@ -60,6 +79,7 @@ angular.module('profile').controller('ProfileController',['$scope',
                 });
                 Profile.currentChildLimited.get({ parentEmail: $routeParams.profileHref }, function(response){
                     console.log('currentChildLimited response is'+JSON.stringify(response));
+                    response.location = formatLocation(response.location);
                     $scope.currentChild = response;
                 }, function(error){
                     console.log('error msg in currentChild');
@@ -150,3 +170,11 @@ angular.module('profile').controller('ProfileController',['$scope',
         }
     };
 });*/
+
+function formatLocation(locationList){
+    var location = ""
+    for (var i=0; i < locationList.length;i++){
+        location=location + locationList[i] + ','
+    }
+    return location.substring(0,location.length-1);
+}

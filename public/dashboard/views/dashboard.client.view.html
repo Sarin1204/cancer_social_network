@@ -74,7 +74,7 @@
                         <div class="panel-body">
                             <form ng-controller="StatusController" role="form" data-ng-submit="post_status()"  class="registration-form">
                                 <div class="form-group">
-                                     <textarea name="message" cols="40" rows="10" data-ng-model="status" id="status" class="form-control message" style="height: 62px; overflow: hidden;" placeholder="What's on your mind ?"></textarea>
+                                     <textarea name="message" cols="40" rows="10" data-ng-model="status" id="status" class="form-control message" style="height: 62px; overflow: hidden;" placeholder="What's on your mind?"></textarea>
                             </div>
                                 <div class="form-group">
                                     <input type="submit" name="submit" value="Post" class="btn btn-primary" style="float:right">
@@ -93,17 +93,57 @@
                                     <div class="col-md-2 nopadding"><img style="height:40px" class="img-thumbnail" ng-src="{{status.profile_photo}}"></div>
                                     <div class="col-md-3 nopadding">
                                         <div class="row">
-                                            <p class="status_info">{{status.status_update_firstname}} {{status.status_update_lastname}}</p>
+                                            <a href="#!/profile/{{status.status_update_email}}">
+                                                <p class="status_info">{{status.status_update_firstname}} {{status.status_update_lastname}}</p>
+                                            </a>
                                             <p class="status_info">{{status.date}}</p>
                                         </div>
-
                                     </div>
                                 </div>
 
 
                             </div>
                             <div class="panel-body">
-                                <div>{{status.body}}</div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div>{{status.body}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-card panel panel-default replycard" data-ng-repeat="comment in status.comments">
+                                <div class="panel-body container-fluid replycard" style="background-color:#f5f5f5">
+                                    <div class="row">
+                                        <div class="col-md-1 nopadding"><img style="height:40px" class="img-thumbnail" ng-src="{{comment.author_profile_photo}}"></div>
+                                        <div class="col-md-10 nopadding" style="display:inline-block">
+                                            <a href="#!/profile/{{comment.author_email}}">
+                                                <p class="status_info comment">{{comment.author_firstname}} {{comment.author_lastname}}</p>
+                                            </a>
+                                            <p class="status_info comment">{{comment.comment_body}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-card panel panel-default replycard">
+                                <div class="panel-body container-fluid replycard" style="background-color:#f5f5f5">
+                                    <div class="row">
+                                        <div class="col-md-1 nopadding">
+                                            <img ng-controller="profilePhotoController" style="height:40px" class="img-thumbnail" ng-src="{{profile_photo}}">
+                                        </div>
+                                        <form ng-controller="CommentController" role="form" data-ng-submit="post_comment()"  class="registration-form">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <textarea name="message" cols="20" rows="8" data-ng-model="comment" id="comment" class="form-control message" style="height: 42px; overflow: hidden;" placeholder="Write a comment..."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 replycard">
+                                                <div class="form-group ">
+                                                    <input type="submit" name="submit" value="Post" class="btn btn-primary btn-sm">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div ng-show="showMessage" class="{{postCommentResult.type}} fadein fadeout">{{postCommentResult.msg}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,6 +170,18 @@
 
                                         </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-card panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <a href="#!/connect">
+                                            <i class="fa fa-users"></i>
+                                             Connect with more parents...
+                                        </a>
                                     </div>
                                 </div>
                             </div>

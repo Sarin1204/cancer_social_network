@@ -9,14 +9,16 @@ module.exports = {
         "firstname" : {"type": "text"},
         "lastname" : {"type": "text"},
         "cancer_type" : {"type": "text"},
-        "zipcode" : {"type": "int"},
         "interests" : {"type": "set", typeDef: "<text>"},
         "hospital": {"type": "text"},
         "gender": {"type": "text"},
         "age": {"type": "int"},
         "parent_firstname": {"type": "text"},
         "parent_lastname": {"type": "text"},
-        "parent_profile_photo": {"type": "text"}
+        "parent_profile_photo": {"type": "text"},
+        "location": {"type": "set", typeDef: "<text>"},
+        "address": {"type": "text"},
+        "school": {"type": "text"}
     },
     "key" : [["cancer_type"],"parent_email"]
 };

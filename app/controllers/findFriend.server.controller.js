@@ -9,6 +9,9 @@ exports.getFollowed = function(req, res, next){
     if( 'profile' in req){
         var email = req.profile.email;
     }
+    else if('profile_email' in req.body){
+        var email = req.body.profile_email;
+    }
     else{
         var email = req.user.email;
     }
