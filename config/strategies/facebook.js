@@ -46,7 +46,7 @@ module.exports = function() {
                                 profile_photo = parents_instance.profile_photo,
                                 tag = parents_instance.email;
                             var query = 'insert into parent_hash_tags (prefix, remaining, firstname, lastname, profile_photo, tag) values (?, ?, ?, ?, ?, ?)',
-                                params = [prefix, remaining, firstname, lastname, tag, profile_photo];
+                                params = [prefix, remaining, firstname, lastname, profile_photo, tag];
                             models.instance.parent_hash_tags.execute_query(query, params, function(err, people){
                                 if(err){
                                     console.log('Error message in signup '+err);
