@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Twitter Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Total Tweets</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-offset-4"><div id = title><h2>Total Tweets</h2></div></div>
+                    <div id="graphDiv" class="col-lg-12">
+                        <style>
+
+                            body {
+                                font: 10px sans-serif;
+                            }
+
+                            .axis path,
+                            .axis line {
+                                fill: none;
+                                stroke: #000;
+                                shape-rendering: crispEdges;
+                            }
+
+                            .bar {
+                                fill: orange;
+                            }
+
+                            .bar:hover {
+                                fill: orangered ;
+                            }
+
+                            .x.axis path {
+                                display: none;
+                            }
+
+                            .d3-tip {
+                                line-height: 1;
+                                font-weight: bold;
+                                padding: 12px;
+                                background: rgba(0, 0, 0, 0.8);
+                                color: #fff;
+                                border-radius: 2px;
+                            }
+
+                            /* Creates a small triangle extender for the tooltip */
+                            .d3-tip:after {
+                                box-sizing: border-box;
+                                display: inline;
+                                font-size: 10px;
+                                width: 100%;
+                                line-height: 1;
+                                color: rgba(0, 0, 0, 0.8);
+                                content: "\25BC";
+                                position: absolute;
+                                text-align: center;
+                            }
+
+                            /* Style northward tooltips differently */
+                            .d3-tip.n:after {
+                                margin: -1px 0 0 0;
+                                top: 100%;
+                                left: 0;
+                            }
+                        </style>
+                        <body>
+                        <script src="http://d3js.org/d3.v3.min.js"></script>
+                        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+                        <script>
+
+                            var margin = {top: 40, right: 20, bottom: 30, left: 40},
+                                    width = 960 - margin.left - margin.right,
+                                    height = 500 - margin.top - margin.bottom;
+
+                            var formatPercent = d3.format(".0%");
+
+                            var x = d3.scale.ordinal()
+                                    .rangeRoundBands([0, width], .1);
+
+                            var y = d3.scale.linear()
+                                    .range([height, 0]);
+
+                            var xAxis = d3.svg.axis()
+                                    .scale(x)
+                                    .orient("bottom");
+
+                            var yAxis = d3.svg.axis()
+                                    .scale(y)
+                                    .orient("left");
+
+
+                            var tip = d3.tip()
+                                    .attr('class', 'd3-tip')
+                                    .offset([-10, 0])
+                                    .html(function(d) {
+                                        return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+                                    })
+
+                            var svg = d3.select("#graphDiv").append("svg")
+                                    .attr("width", width + margin.left + margin.right)
+                                    .attr("height", height + margin.top + margin.bottom)
+                                    .append("g")
+                                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                            svg.call(tip);
+                            var data = [
+                                {"letter" : "Donald Trump", "frequency" : 2500},
+                                {"letter" : "Hillary Clinton", "frequency" : 1500},
+                                {"letter" : "Bernie Sanders", "frequency" : 1300},
+                                {"letter" : "Jeb Bush", "frequency" : 200},
+                                {"letter" : "Martin O' Malley", "frequency" : 400},
+                                {"letter" : "Ted Cruz", "frequency" : 1300}
+                            ];
+
+                                x.domain(data.map(function(d) { return d.letter; }));
+                                y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+                                svg.append("g")
+                                        .attr("class", "x axis")
+                                        .attr("transform", "translate(0," + height + ")")
+                                        .call(xAxis)
+                                        .append("text")
+                                        .attr("x", 400)
+                                        .attr("y", 30)
+                                        .text("Candidates");
+
+                                svg.append("g")
+                                        .attr("class", "y axis")
+                                        .call(yAxis)
+                                        .append("text")
+                                        .attr("transform", "rotate(-90)")
+                                        .attr("y", 6)
+                                        .attr("dy", ".71em")
+                                        .style("text-anchor", "end")
+                                        .text("Tweets");
+
+                                svg.selectAll(".bar")
+                                        .data(data)
+                                        .enter().append("rect")
+                                        .attr("class", "bar")
+                                        .attr("x", function(d) { return x(d.letter); })
+                                        .attr("width", x.rangeBand())
+                                        .attr("y", function(d) { return y(d.frequency); })
+                                        .attr("height", function(d) { return height - y(d.frequency); })
+                                        .on('mouseover', tip.show)
+                                        .on('mouseout', tip.hide)
+
+
+                            function type(d) {
+                                d.frequency = +d.frequency;
+                                return d;
+                            }
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

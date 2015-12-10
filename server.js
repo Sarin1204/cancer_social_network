@@ -7,6 +7,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('./config/express');
 var cassandra = require('./config/cassandra');
 var passport = require('./config/passport');
+var sequelize = require('./config/sequelize');
 
 var app = express();
 var passport = passport();

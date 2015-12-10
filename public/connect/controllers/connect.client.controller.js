@@ -40,6 +40,19 @@ angular.module('connect').controller('connectController',['$scope','Authenticati
                 $scope.locations[locations[i]] = true;
             }
 
+            var filters = {
+                'cancerType[]' : cancerType,
+                'locations[]' : locations,
+                'interests[]' : interests
+            };
+
+            Connect.getConnections.query(filters, function(response){
+                console.log('Success in getConnections '+JSON.stringify(response));
+                $scope.parents = response
+            },function(error){
+                console.log('Error in getConnections '+error);
+            });
+
 
         }, function error(){
             console.log('error msg in currentChild');
@@ -149,8 +162,9 @@ angular.module('connect').controller('connectController',['$scope','Authenticati
                 'interests[]' : interests
             };
 
-            Connect.getConnections.get(filters, function(response){
-                console.log('Success in getConnections '+JSON.stringify(response))
+            Connect.getConnections.query(filters, function(response){
+                console.log('Success in getConnections '+JSON.stringify(response));
+                $scope.parents = response
             },function(error){
                 console.log('Error in getConnections '+error);
             });

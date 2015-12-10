@@ -68,6 +68,7 @@ exports.friendRecommend = function(req,res){
             for(var i=0; i< friendsRecommended.length; i++){
                 console.log('inside friendsRecommended loop '+friendsRecommended[i]['parent_email']);
                 if (!(friendsRecommended[i]['parent_email'] in friendObject)){
+                    friendsRecommended[i]['cancer_type'] = cancer_type;
                     friends.push(friendsRecommended[i]);
                 }
             }

@@ -20,6 +20,8 @@
     "passport-twitter" : "latest",
     "cassandra-store": "latest",
     "bcrypt": "latest",
-    "node-uuid": "latest"
+    "node-uuid": "latest",
+    "sequelize": "latest",
+    "mysql": "latest"
   }
 }

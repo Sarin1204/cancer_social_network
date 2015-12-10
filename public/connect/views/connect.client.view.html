@@ -149,8 +149,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="panel-card panel">
+                <div class="col-md-8">
+                    <div class="panel-card panel" style="margin-bottom:0; border-bottom-color: #e0e0e0" data-ng-repeat="parent in parents">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2 nopadding"><img style="height:90px; width: 90px;" class="img-thumbnail" ng-src="{{parent.profile_photo}}"></div>
+                                <div class ="col-md-10 nopadding">
+                                    <div class="row">
+                                        <a href="#!/profile/{{parent.email}}" style="font-size:16px; font-weight:bold">{{parent.firstname}} {{parent.lastname}}</a>
+                                        <p style="font-size:12px; color:#a9a9a9">Has a child with {{parent.cancer_type}}</p>
+                                        <p style="font-size:12px; color:#a9a9a9">Lives in {{parent.locations}}</p>
+                                        <p style="font-size:12px; color:#a9a9a9">Their child is interested in {{parent.interests}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
