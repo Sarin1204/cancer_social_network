@@ -4,6 +4,7 @@
 
 var models = require('express-cassandra'),
     bcrypt = require('bcrypt');
+var sequelize = require("../../config/sequelize").getSequelize;
 
 exports.signup = function(req, res, next) {
     if (!req.user) {
@@ -47,11 +48,20 @@ exports.signup = function(req, res, next) {
                             return res.redirect('/');
                         }
                         else{
-                            console.log('Batch query to save parent successful');
-                            req.login(parent, function(err){
-                                if (err) return next(err);
-                                return res.redirect('/');
-                            });
+                            console.log('Batch query to save parent in cassandraDB successful');
+
+                            var query = "insert into parent (email, firstname, lastname, phone, profile_photo) values (?,?,?,?,?)";
+
+                            sequelize.query(query,
+                                { replacements: [email, firstname, last, phone, profile_photo], type: sequelize.QueryTypes.SELECT }
+                            ).then(function(projects) {
+                                    console.log(projects);
+
+                                    req.login(parent, function(err){
+                                        if (err) return next(err);
+                                        return res.redirect('/');
+                                    });
+                                });
                         }
                     });
                 });

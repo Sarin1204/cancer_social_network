@@ -33,10 +33,6 @@ exports.signup = function(req, res, next) {
         {
             query: "INSERT INTO child_cancer_type (parent_email, id, age, cancer_type, firstname, gender, hospital, interests, lastname, parent_firstname, parent_lastname, parent_profile_photo, address, location, school) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)",
             params: [child.parent_email, child.id,  child.age,  child.cancer_type,  child.firstname,  child.gender, child.hospital,  child.interests,  child.lastname, parent.firstname, parent.lastname, parent.profile_photo, req.body.address, req.body.location, child.school]
-        },
-        {
-            query: "INSERT INTO child_connect_filter (parent_email, id, age, cancer_type, firstname, gender, hospital, interests, lastname, parent_firstname, parent_lastname, parent_profile_photo, address, location, school) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)",
-            params: [child.parent_email, child.id,  child.age,  child.cancer_type,  child.firstname,  child.gender, child.hospital,  child.interests,  child.lastname, parent.firstname, parent.lastname, parent.profile_photo, req.body.address, req.body.location, child.school]
         }
 
     ];

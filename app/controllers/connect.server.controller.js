@@ -12,19 +12,23 @@ exports.getConnections = function(req, res){
     locations = locations.toString().split(',');
     var paramLocations = "";
     for(var i=0;i<locations.length;i++){
-        paramLocations += "'"+ locations[i] +"'"
+        paramLocations += "'"+ locations[i] +"',"
     }
+    paramLocations = paramLocations.slice(0,paramLocations.length-1);
     cancerType = cancerType.toString().split(',');
     var paramCancerTypes = "";
     for(var i=0;i<cancerType.length;i++){
-        paramCancerTypes += "'"+ cancerType[i] +"'"
+        paramCancerTypes += "'"+ cancerType[i] +"',"
     }
-
+    paramCancerTypes = paramCancerTypes.slice(0,paramCancerTypes.length -1);
     interests = interests.toString().split(',');
     var paramInterests = "";
     for(var i=0;i<interests.length;i++){
-        paramInterests += "'"+ interests[i] +"'"
+        paramInterests += "'"+ interests[i] +"',"
     }
+    paramInterests = paramInterests.slice(0,paramInterests.length - 1);
+    console.log('paramCancerTypes is'+paramCancerTypes);
+    console.log('paramLocations is '+paramLocations);
     var query = "select l.email, p.firstname, p.lastname, p.profile_photo, c.cancer_type, l.locations, group_concat(i.name separator ',') interests from" +
         " (select parent_email email,group_concat(l.name separator ',') locations from location l" +
         " inner join parent_location p_l on l.location_id = p_l.location_id where parent_email in" +
@@ -37,7 +41,7 @@ exports.getConnections = function(req, res){
 
     sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
         .then(function(parents) {
-            console.log(JSON.stringify("Inside connect query return successful parents are "+parents))
+            console.log(JSON.stringify("Inside connect query return successful parents are "+parents));
             return res.json(parents)
         })
 };
