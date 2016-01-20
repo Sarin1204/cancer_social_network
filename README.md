@@ -1,8 +1,6 @@
 # cancer_social_network
-The Cancer Social Network is a Social Network built for Children's Cancer Network, an NGO in Arizona helping families whose children
-have cancer. The network facilitates the creation of connections between such families to provide mutual aid and support.
-Cancer Social Network was primarily built for the parents of children who have cancer, not the children themselves to ensure the safety
-of the children involved.
+The Cancer Social Network is a Social Network built for Children's Cancer Network, an NGO in Arizona helping families whose children have cancer. The network facilitates the creation of connections between such families to provide mutual aid and support. Please do check out the screenshots of the Network in the Wiki!
+Cancer Social Network was primarily built for the parents of children who have cancer, not the children themselves to ensure the safety of the children involved.
 The Network supports the following features:
 1. Friendships - Users can send friend requests to other users, who can choose to accept them or not.
 2. Status Updates and Comments - Users can post status updates as well as comment on status updates from friends. Status updates from 
